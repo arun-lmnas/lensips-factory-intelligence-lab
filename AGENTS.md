@@ -6,11 +6,18 @@ hypothesis. Read it before doing anything else here.
 
 ## Current status
 
-Gate 0 (reproducible devcontainer) is done — see
-[reports/BOOTSTRAP_REPORT.md](reports/BOOTSTRAP_REPORT.md) for what was
-built and verified, and known limitations. Do not start Gate 1 or later
-without explicit instruction — see README.md section 12 for the gate
-sequence.
+- **Gate 0** (reproducible devcontainer) is done — see
+  [reports/BOOTSTRAP_REPORT.md](reports/BOOTSTRAP_REPORT.md).
+- **Gate 1** (reference architecture, enterprise evidence, and LENSIPS
+  capability selection) is done — see
+  [reports/CAPABILITY_PORTFOLIO.md](reports/CAPABILITY_PORTFOLIO.md) for
+  the MUST/SHOULD/COULD/WON'T decisions and the recommended next
+  experiment, and [reports/LENSIPS_GAP_ANALYSIS.md](reports/LENSIPS_GAP_ANALYSIS.md)
+  for the reasoning behind them. No implementation happened in Gate 1 —
+  it produced research/evidence artifacts only.
+
+Do not start Gate 2 or later without explicit instruction — see README.md
+section 12 for the gate sequence.
 
 ## Ground rules for every task in this repo
 
