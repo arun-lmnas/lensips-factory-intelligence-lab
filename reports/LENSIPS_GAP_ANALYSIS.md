@@ -64,26 +64,41 @@ below, rather than forcing a predetermined architecture.
 
 ## 3. Genuine gaps / opportunities — where there appears to be meaningful room for LENSIPS
 
-- **An evidence/data-reliability layer that is a first-class, customer-facing
-  output, not an internal preprocessing step.** No platform surveyed
-  (Signavio, Celonis, OFacT) was found to publish a mature, customer-facing
-  confidence-scoring/data-quality-reporting capability — this is flagged
-  `INSUFFICIENT EVIDENCE` in ENTERPRISE_EVIDENCE.md #17 and REFERENCE_
-  ARCHITECTURE.md §8. Given that this lab's README already identifies data
-  reliability as a first-class business concern, and that the academic
-  literature confirms SME manufacturing data is commonly sparse (evidence
-  #12), a LENSIPS capability that explicitly reports "what we know, what we
-  inferred, what's missing, and how confident we are" appears to be a real,
-  evidenced gap rather than a hypothesis. This is squarely inside LENSIPS's
-  existing ERP-native position — LENSIPS already sits inside the data
-  source, unlike Signavio/Celonis which connect externally.
-- **A right-sized, ERP-embedded process/factory intelligence capability for
-  medium manufacturers**, at a cost and implementation-effort point far
-  below Celonis/Signavio. Because LENSIPS is already the ERP for these
-  customers, it can reuse master data and process context that an external
-  process-mining tool would otherwise have to extract and reconcile from
-  scratch — a structural advantage no platform surveyed has for this
-  customer segment specifically.
+- **A data integration, normalization, reconciliation and reliability layer
+  across a medium manufacturer's existing systems** (ERP, MES, QMS,
+  engineering tools, spreadsheets, IoT/machine data), that is a
+  first-class, customer-facing output, not an internal preprocessing step.
+  No platform surveyed (Signavio, Celonis, OFacT) was found to publish a
+  mature, customer-facing confidence-scoring/data-quality-reporting
+  capability — this is flagged `INSUFFICIENT EVIDENCE` in
+  ENTERPRISE_EVIDENCE.md #17 and REFERENCE_ARCHITECTURE.md §8. Given that
+  this lab's README already identifies data reliability as a first-class
+  business concern, and that the academic literature confirms SME
+  manufacturing data is commonly sparse and fragmented across systems
+  (evidence #12, #17), a capability that explicitly reports "what we know,
+  what we inferred, what's missing, and how confident we are" — across
+  *whichever* of the customer's systems actually hold the relevant data —
+  appears to be a real, evidenced gap rather than a hypothesis. **Note:**
+  this reframes the earlier draft of this report, which incorrectly
+  assumed LENSIPS already sits inside the data as the customer's ERP. That
+  assumption is corrected here: LENSIPS must integrate with whatever
+  systems the customer actually runs (which may or may not include LENS
+  ERP), and how much of that integration effort LENSIPS can realistically
+  absorb is itself `INSUFFICIENT EVIDENCE` — see the "Corrected LENSIPS
+  Positioning" section of [CAPABILITY_PORTFOLIO.md](CAPABILITY_PORTFOLIO.md).
+- **A right-sized process/factory intelligence capability for medium
+  manufacturers**, at a cost and implementation-effort point far below
+  Celonis/Signavio, that works across a customer's existing system
+  landscape rather than requiring a full enterprise data estate. Unlike the
+  original draft's assumption, this is *not* justified by LENSIPS already
+  owning the data — no evidence supports that as LENSIPS's positioning (see
+  CAPABILITY_PORTFOLIO.md's "Corrected LENSIPS Positioning"). The
+  potential differentiation instead rests on integration/implementation
+  effort being smaller than Celonis/Signavio's, because the target scope
+  is deliberately narrower (one manufacturer's core planning and
+  production processes, not cross-enterprise orchestration) — this
+  narrower-scope-is-cheaper hypothesis is plausible but **unproven**, and
+  should be tested before being relied on as differentiation.
 - **Narrow, evidence-grounded engineering-intelligence assistance** —
   *not* "is this IEC compliant" (unsupported by any platform, and
   contradicted by how IEC 60076 compliance actually works — see
@@ -158,13 +173,24 @@ below, rather than forcing a predetermined architecture.
   documented hallucination risk (evidence #15), not just a stylistic
   preference.
 - **Do not attempt to compete with Celonis/SAP Signavio on general-purpose,
-  cross-enterprise process orchestration.** LENSIPS's differentiation is
-  being embedded in the ERP for a specific customer segment with a
-  specific manufacturing focus, not breadth of process coverage.
-- **Do not build a general-purpose event-log extraction/ETL framework for
-  arbitrary third-party ERPs.** LENSIPS already has direct, native access
-  to its own data model — the "extract event logs from an external SAP
-  system" problem that Signavio/Celonis solve does not apply to LENSIPS's
-  own data in the same way, and solving it for arbitrary external systems
-  is a different (and much larger) problem than the one motivating this
-  research.
+  cross-enterprise process orchestration.** LENSIPS's intended
+  differentiation is depth for a specific customer segment (medium
+  manufacturers, transformer manufacturing focus) with deliberately
+  narrower scope, not breadth of process/system coverage. (Corrected: this
+  is not because LENSIPS is embedded as the customer's ERP — it may not
+  be. It is a scope choice.)
+- **Do not build a general-purpose event-log extraction/ETL framework
+  capable of connecting to *any* arbitrary third-party ERP/MES/QMS.**
+  That breadth-of-connectivity problem is what Signavio and Celonis have
+  already invested heavily in solving, and matching it would be
+  competing with them on their own turf (Rule 5). **Corrected:** this does
+  **not** mean LENSIPS can skip integration — the corrected positioning
+  requires LENSIPS to reconcile data from whichever specific systems a
+  given customer actually runs (possibly SAP, Dynamics, Infor, a local
+  ERP, an MES, spreadsheets, and/or LENS ERP). The right-sized version of
+  this capability is a small, targeted set of adapters/reconciliation
+  logic for the systems LENSIPS's actual target customers commonly run,
+  built incrementally per engagement if needed — not a generic
+  any-system connector platform. How much this costs in practice is
+  unproven — see "Corrected LENSIPS Positioning" in
+  [CAPABILITY_PORTFOLIO.md](CAPABILITY_PORTFOLIO.md).

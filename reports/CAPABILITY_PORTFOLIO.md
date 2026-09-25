@@ -20,8 +20,10 @@ before technology; insufficient evidence is stated explicitly.
 ## Capability entries
 
 ```text
-Capability: Case-centric process discovery & conformance on LENSIPS's own
-            order/production data (using PM4Py)
+Capability: Case-centric process discovery & conformance on a medium
+            manufacturer's order/production data, sourced from whichever
+            system(s) the customer actually runs (ERP, MES, spreadsheets,
+            and/or LENS ERP where present), using PM4Py
 Customer problem: "Show me how orders actually flow through my factory,
             and where they deviate from the intended process."
 Enterprise evidence: HIGH (mature, widely used technique; PM4Py verified
@@ -32,70 +34,125 @@ Evidence confidence: PROVEN (methodology and tooling), EMERGING (ROI at
 Medium-enterprise applicability: HIGH — works with the coarser, milestone-
             level event data medium manufacturers typically have, as long
             as expectations are calibrated (see data-quality note below)
-Required data: order/production timestamps already present in LENSIPS's
-            own data model; no new data collection needed to start
-Implementation effort: MEDIUM — algorithms are proven and available for
-            free (PM4Py); effort is in mapping LENSIPS's own data model to
-            a usable event log, not in inventing new mining algorithms
+Required data: order/production timestamps and identifiers, obtained from
+            the customer's actual system(s) of record. **Corrected:** the
+            original draft assumed these were "already present in
+            LENSIPS's own data model" because LENSIPS was assumed to be the
+            customer's ERP. That assumption is removed — LENSIPS must not
+            be assumed to own this data; it must be obtained via
+            integration with whatever system(s) actually hold it, which
+            may or may not include LENS ERP.
+Implementation effort: MEDIUM-HIGH — revised upward from the original
+            MEDIUM rating. The algorithms are proven and free (PM4Py); the
+            added effort, not present in the original draft, is
+            integrating with and normalizing data from the customer's
+            actual system(s) of record rather than assuming it is already
+            in a LENSIPS-native format. How much this integration effort
+            costs in practice for a typical target customer is
+            **unproven** — flagged as needing additional evidence.
 Expected customer value: HIGH — this is the foundational capability nearly
             every other capability in this portfolio depends on
-Time to value: SHORT
-Differentiation: LOW on the algorithm itself (commoditized), MEDIUM-HIGH on
-            being natively embedded in the ERP the customer already uses
-            (no extraction project required, unlike Signavio/Celonis)
+Time to value: SHORT once data is accessible; the corrected effort rating
+            above means "short" no longer includes the integration step
+Differentiation: LOW on the algorithm itself (commoditized). **Corrected:**
+            the original "MEDIUM-HIGH, native ERP embedding" differentiation
+            claim is removed — it assumed LENSIPS already owns the data,
+            which is not the intended positioning. Differentiation, if any,
+            would have to come from LENSIPS needing to integrate a smaller,
+            more focused set of systems/processes than Celonis/Signavio
+            typically do (narrower scope, not native ownership) — this is
+            plausible but **unproven**; see "Corrected LENSIPS Positioning"
+            below.
 Dependence on external IP: LOW (PM4Py is open source, Apache-licensed
             per its published documentation)
 MoSCoW: MUST
 Recommendation: Build this as the foundation. Reuse PM4Py; do not
-            reimplement discovery/conformance algorithms.
-Reason: Mature technology + direct customer value + already-owned data +
-            near-zero licensing cost + clear differentiation from
-            enterprise process-mining tools on cost/embedding, not on
-            algorithmic novelty.
+            reimplement discovery/conformance algorithms. Treat data
+            integration/reconciliation as a required, budgeted part of this
+            capability, not a free assumption.
+Reason: Mature technology + direct customer value + near-zero algorithm
+            licensing cost. **Corrected:** the original reasoning also cited
+            "already-owned data" as a reason — that is removed; the
+            remaining case for MUST rests on the technology and customer
+            value alone, not on an assumed data-ownership advantage.
 Evidence: ENTERPRISE_EVIDENCE.md #6, #7, #8; REFERENCE_ARCHITECTURE.md §2-3, §5
 ```
 
 ```text
-Capability: Evidence / Data Reliability Layer (confidence scoring +
-            explicit "what's missing" reporting, attached to every finding)
-Customer problem: "Can I trust this finding, given how messy my data
-            actually is?" — directly named as a business concern in
+Capability: Integration, Normalization, Reconciliation & Reliability Layer
+            across a customer's existing systems (ERP, MES, QMS,
+            engineering tools, spreadsheets, IoT/machine data), producing
+            confidence scoring + explicit "what's missing" reporting on
+            every finding. **Corrected:** this capability's name and scope
+            are widened from the original draft's "Evidence / Data
+            Reliability Layer," which implicitly assumed the data was
+            already inside LENSIPS and only needed a confidence score on
+            top. Under the corrected positioning, integration and
+            reconciliation across multiple, possibly inconsistent external
+            systems is itself part of this capability's core job, not a
+            precondition solved elsewhere.
+Customer problem: "Can I trust this finding, given how messy and
+            fragmented my data actually is across my ERP/MES/QMS/
+            spreadsheets?" — directly named as a business concern in
             README.md §7
 Enterprise evidence: LOW — no surveyed platform (Signavio, Celonis, OFacT)
             was found to have a mature, customer-facing version of this
             (INSUFFICIENT EVIDENCE either way per ENTERPRISE_EVIDENCE.md #17
-            and REFERENCE_ARCHITECTURE.md §8)
+            and REFERENCE_ARCHITECTURE.md §8). Note that Signavio and
+            Celonis themselves must solve cross-system integration as
+            external tools connecting to ERP/MES/etc. — the corrected
+            positioning puts LENSIPS in a similar position to theirs on
+            this specific problem, not in a privileged one.
 Evidence confidence: HYPOTHESIS (the need is evidenced — SME manufacturing
-            data sparsity is PROVEN per ENTERPRISE_EVIDENCE.md #12 — but no
-            evidence exists yet that LENSIPS's specific design for this
-            layer will work)
+            data sparsity and fragmentation across systems is PROVEN per
+            ENTERPRISE_EVIDENCE.md #12, #17 — but no evidence exists yet
+            that LENSIPS's specific design for this layer will work, or
+            that LENSIPS can integrate a customer's systems more cheaply
+            than Signavio/Celonis can)
 Medium-enterprise applicability: HIGH — this is precisely the customer
-            segment (SMMC) documented to have sparse, milestone-only event
-            data
-Required data: the same order/production data as the discovery capability,
-            plus metadata about source-system coverage/completeness
-Implementation effort: MEDIUM-HIGH — no off-the-shelf library computes
-            this; it requires original design work (this is the "domain
-            modelling" + "algorithms" kind of effort, not "AI reasoning")
+            segment (SMMC) documented to have sparse, fragmented,
+            milestone-only event data spread across systems
+Required data: order/production data plus metadata about source-system
+            coverage/completeness, obtained from whichever of the
+            customer's systems (ERP, MES, QMS, spreadsheets, IoT) actually
+            hold it — **not** assumed to already be inside LENSIPS
+Implementation effort: HIGH — revised upward from the original
+            MEDIUM-HIGH rating. In addition to the original-design work for
+            confidence scoring (no off-the-shelf library computes this),
+            this capability now explicitly includes integration/
+            reconciliation across multiple external systems per customer,
+            which is a substantial, evidenced cost driver for the
+            comparable enterprise platforms (see ENTERPRISE_EVIDENCE.md
+            #14 on Celonis implementation costs, much of which is
+            integration work). How much smaller LENSIPS's version of this
+            can be made for its narrower target scope is **unproven**.
 Expected customer value: HIGH — differentiates LENSIPS from tools that
             silently assume complete/clean data
-Time to value: MEDIUM
-Differentiation: HIGH — this is a genuine, evidenced gap (Rule 4 applies:
-            low evidence does not mean WON'T, especially when the customer
-            problem it solves is well evidenced even if the specific
-            solution isn't)
+Time to value: MEDIUM, revised from the original rating to reflect the
+            added integration scope — could be LONG per customer if their
+            system landscape is unusually fragmented
+Differentiation: MEDIUM-HIGH — revised down from the original HIGH rating.
+            The customer problem is a genuine, evidenced gap (Rule 4
+            applies: low technology evidence does not mean WON'T), but the
+            original claim that LENSIPS's ERP position made this cheaper to
+            build is removed; differentiation must instead come from
+            deliberately narrower scope (specific systems, specific
+            processes) than Celonis/Signavio target, which is unproven.
 Dependence on external IP: LOW
 MoSCoW: MUST
 Recommendation: Design and build this alongside the discovery capability
             from the start, not as an afterthought. Every finding LENSIPS
             produces should carry a confidence/evidence-completeness
-            statement.
+            statement, and the integration/reconciliation effort required
+            per customer system landscape should be estimated and tracked
+            explicitly rather than assumed away.
 Reason: Rule 4 (low technology evidence + high customer value justifies a
             focused effort) combined with Rule 7 (customer problem before
-            technology) — the customer problem (untrustworthy data) is
-            strongly evidenced even though no reference implementation
-            exists to copy.
-Evidence: ENTERPRISE_EVIDENCE.md #12, #17; REFERENCE_ARCHITECTURE.md §8;
+            technology) — the customer problem (untrustworthy, fragmented
+            data) is strongly evidenced even though no reference
+            implementation exists to copy, and even though LENSIPS has no
+            proven cost advantage in solving the integration part of it.
+Evidence: ENTERPRISE_EVIDENCE.md #12, #14, #17; REFERENCE_ARCHITECTURE.md §8;
             LENSIPS_GAP_ANALYSIS.md §3
 ```
 
@@ -117,8 +174,14 @@ Medium-enterprise applicability: MEDIUM — valuable for specific
             everywhere adds complexity SME teams may struggle to interpret
             (REFERENCE_COMPARISON.md)
 Required data: relationships between orders, components, machines, and
-            inspections — likely already present in LENSIPS's BOM/routing
-            data model, needs to be projected into OCEL form
+            inspections. **Corrected:** the original draft assumed this was
+            "likely already present in LENSIPS's BOM/routing data model" —
+            that assumes LENSIPS is the ERP holding BOM/routing data, which
+            is not the corrected positioning. This data would need to come
+            from whichever of the customer's systems (ERP, engineering
+            tools, MES) holds BOM/routing/inspection records, via the
+            Integration/Reliability Layer above, then be projected into
+            OCEL form.
 Implementation effort: MEDIUM — PM4Py provides the OCEL tooling; effort is
             in selecting the right narrow scope and mapping LENSIPS data to
             it, not building OCPM algorithms from scratch
@@ -229,13 +292,19 @@ Enterprise evidence: MEDIUM — this is a natural extension of the proven
             product feature in the specific "is this reasonable" framing
 Evidence confidence: EMERGING
 Medium-enterprise applicability: HIGH — requires only the factory's own
-            historical data, which LENSIPS already has natively; does not
-            require external industry benchmark datasets that may not
-            exist or be trustworthy for a niche segment like transformer
-            manufacturing
+            historical data (not external industry benchmark datasets that
+            may not exist or be trustworthy for a niche segment like
+            transformer manufacturing). **Corrected:** the original claim
+            that LENSIPS "already has [this] natively" is removed — the
+            factory's historical order data would need to be obtained from
+            whichever of the customer's systems holds it (ERP/MES/
+            spreadsheets), via the Integration/Reliability Layer, the same
+            as for the discovery capability above.
 Required data: sufficient historical order data of comparable
-            type/size/complexity — feasibility depends on order volume and
-            variability at a given factory (open question, see Proposed
+            type/size/complexity, obtained from the customer's actual
+            system(s) — feasibility depends on order volume and
+            variability at a given factory, and on how much of that history
+            is actually accessible/reliable (open question, see Proposed
             Next Gate)
 Implementation effort: MEDIUM — statistical comparison against historical
             distributions, combined with the Evidence/Data Reliability
@@ -244,15 +313,21 @@ Expected customer value: HIGH — directly answers a version of the
             triggering business question from README.md §1 that is
             actually achievable
 Time to value: MEDIUM
-Differentiation: HIGH — no surveyed platform packages this specifically
-            for a medium manufacturer's own order history
+Differentiation: MEDIUM-HIGH — revised down slightly from the original HIGH
+            rating. No surveyed platform packages this specifically for a
+            medium manufacturer's own order history, but this capability
+            now depends on the same unproven integration-cost advantage as
+            the capabilities above rather than on "data it already owns."
 MoSCoW: SHOULD
-Recommendation: Pursue after the discovery + data-reliability MUSTs are
-            proven, as a direct answer to the "is this reasonable" business
-            question that avoids the infeasible standards-compliance framing.
+Recommendation: Pursue after the discovery + integration/reliability MUSTs
+            are proven, as a direct answer to the "is this reasonable"
+            business question that avoids the infeasible
+            standards-compliance framing.
 Reason: Rule 7 and Rule 5 — reframes a commoditized-sounding ambition
-            ("benchmarking") into something LENSIPS can deliver more simply
-            than any enterprise platform, using data it already owns.
+            ("benchmarking") into something narrower and potentially
+            simpler than a full enterprise platform, though the
+            "simpler/cheaper" claim itself needs testing, not data
+            ownership (which was incorrectly assumed in the original draft).
 Evidence: LENSIPS_GAP_ANALYSIS.md §3; ENTERPRISE_EVIDENCE.md #6, #7
 ```
 
@@ -336,9 +411,16 @@ Enterprise evidence: HIGH for the enterprise segment, but priced and built
             for large enterprises (ENTERPRISE_EVIDENCE.md #14)
 Evidence confidence: PROVEN (as an enterprise-segment product category)
 Medium-enterprise applicability: LOW
-Required data: extraction pipelines from arbitrary third-party systems —
-            a fundamentally different (and larger) engineering problem than
-            LENSIPS's native-data advantage
+Required data: extraction/connector pipelines capable of handling
+            *arbitrary* third-party systems, at Celonis/Signavio's level of
+            breadth — a fundamentally larger engineering problem than the
+            narrow, targeted integration work scoped into the
+            Integration/Reliability Layer capability above. **Corrected:**
+            the original draft contrasted this against a "LENSIPS's
+            native-data advantage" that does not exist under the corrected
+            positioning; the real contrast is breadth (arbitrary systems,
+            many processes) vs. the narrow, targeted scope LENSIPS is
+            pursuing instead.
 Implementation effort: VERY HIGH
 Expected customer value: LOW relative to effort, for LENSIPS's actual
             target segment
@@ -346,12 +428,17 @@ Time to value: LONG
 Differentiation: LOW — this would put LENSIPS in direct feature-breadth
             competition with well-funded incumbents on their own turf
 MoSCoW: WON'T FOR NOW
-Recommendation: Do not pursue. LENSIPS's differentiation is native
-            embedding + medium-manufacturer focus, not platform breadth.
+Recommendation: Do not pursue broad, any-system connector breadth.
+            **Corrected:** LENSIPS's differentiation is not "native
+            embedding" (that assumption is removed) — it is deliberately
+            narrower scope (a specific customer segment, a specific set of
+            processes and systems) than the general-purpose EMS platforms,
+            which still requires real integration work, just less of it.
 Reason: Rule 5 — this capability is already commoditized by incumbents at
             a scale/price point LENSIPS should not try to match; no
-            evidence that LENSIPS could deliver it "substantially more
-            simply."
+            evidence that LENSIPS could deliver arbitrary-system breadth
+            "substantially more simply," and no evidence needed to reach
+            that conclusion since LENSIPS is not attempting that breadth.
 Evidence: REFERENCE_COMPARISON.md; ENTERPRISE_EVIDENCE.md #14;
             LENSIPS_GAP_ANALYSIS.md §5
 ```
@@ -360,11 +447,15 @@ Evidence: REFERENCE_COMPARISON.md; ENTERPRISE_EVIDENCE.md #14;
 
 ## MUST
 
-1. **Case-centric process discovery & conformance on LENSIPS's own data**
-   (PM4Py-based) — the proven, low-cost, high-value foundation.
-2. **Evidence / Data Reliability Layer** — the evidenced customer need with
-   no proven off-the-shelf answer; must be designed in from the start, not
-   bolted on later.
+1. **Case-centric process discovery & conformance on the customer's
+   order/production data** (PM4Py-based), sourced via integration with
+   whichever systems the customer actually runs — the proven, low-cost
+   (algorithmically), high-value foundation. Integration effort is real and
+   must be budgeted, not assumed away.
+2. **Integration, Normalization, Reconciliation & Reliability Layer** —
+   the evidenced customer need with no proven off-the-shelf answer; must be
+   designed in from the start, not bolted on later. Its cost relative to
+   Celonis/Signavio's equivalent integration work is currently unproven.
 
 ## SHOULD
 
@@ -426,12 +517,20 @@ Evidence: REFERENCE_COMPARISON.md; ENTERPRISE_EVIDENCE.md #14;
 
 ### What We Suspect
 
-- LENSIPS's native position inside the ERP (rather than an external tool
-  that must extract and reconcile data from source systems) is a genuine
-  structural advantage for the target customer segment — but this has not
-  been evidenced with a real deployment, only inferred from the evidence
-  about extraction being a major cost driver for external tools.
-- A confidence-scored "evidence/data reliability layer" is likely to be
+- **Corrected:** the original draft of this report suspected that LENSIPS's
+  position as the customer's ERP was a genuine structural advantage. That
+  premise is incorrect — LENSIPS must not be assumed to be the customer's
+  ERP, and it may operate alongside SAP, Dynamics, Infor, a local ERP, an
+  MES, a QMS, spreadsheets, and IoT data, integrating with LENS ERP only
+  where present. What remains a plausible (but unproven) hypothesis is
+  narrower: that LENSIPS can integrate a *smaller, more targeted* slice of
+  a customer's system landscape (the specific processes and systems that
+  matter for factory planning/intelligence) more cheaply than a
+  general-purpose platform like Celonis or Signavio, which is built to
+  integrate broadly across an entire enterprise's systems and processes.
+  This "narrower scope is cheaper to integrate" hypothesis has not been
+  evidenced with a real deployment and needs direct testing.
+- A confidence-scored "integration/reliability layer" is likely to be
   more valuable to this customer segment than more analytically
   sophisticated capabilities built on data those customers may not
   actually have.
@@ -479,3 +578,64 @@ manufacturers (evidence #12) still allow useful process-intelligence
 output — before any further architectural or product commitment is made.
 This is consistent with Gate 2 as already planned in README.md §12 and
 does not require starting Gate 3 or later.
+
+---
+
+## Corrected LENSIPS Positioning
+
+*Added in the Gate 1 correction pass (commit `fb10b93` and later). The
+original Gate 1 reports repeatedly assumed LENSIPS was the customer's ERP,
+and treated "native ERP data" as a structural advantage. That assumption
+was incorrect and has been removed throughout the reports above. This
+section states the corrected positioning explicitly.*
+
+**What LENSIPS is:** primarily a Factory Planning & Intelligence layer
+intended to operate alongside a medium manufacturer's existing systems —
+whatever those happen to be (SAP, Dynamics, Infor, a local ERP, an MES, a
+QMS, engineering systems, spreadsheets, machine/IoT data). It may integrate
+with LENS ERP where a customer runs it, but it must not depend on doing so.
+
+**What LENSIPS is not:** it is not assumed to be the customer's system of
+record for order, production, or master data, and it is not assumed to
+have privileged, cost-free access to that data. Every capability in this
+portfolio that consumes order/production/BOM/routing data must obtain it
+through integration with the customer's actual system(s), the same
+structural position that SAP Signavio and Celonis are in when they connect
+to a customer's SAP/Oracle/other systems.
+
+**Where its potential advantage comes from:** not from data ownership.
+The only advantage hypothesis that survives this correction is *scope*:
+LENSIPS is not attempting Celonis/Signavio's breadth (arbitrary systems,
+cross-enterprise process orchestration, dozens of processes). It targets a
+specific customer segment (medium manufacturers) and a specific set of
+processes (factory planning and production intelligence, with a
+transformer-manufacturing focus). A deliberately narrower integration
+target — a handful of systems and processes relevant to planning and
+production, not an enterprise-wide connector platform — is plausibly
+cheaper to build and operate than a general-purpose EMS, and may be easier
+to justify to a customer without a large IT/data engineering team. This is
+a scope-based hypothesis, not a data-ownership-based one.
+
+**What remains unproven:**
+
+- Whether LENSIPS's narrower integration scope is actually meaningfully
+  cheaper, in engineering effort or elapsed time, than the equivalent slice
+  of what Celonis/Signavio would need to do for the same processes — no
+  cost comparison was evidenced in this gate.
+- What the *minimum* data LENSIPS can realistically obtain from a typical
+  medium manufacturer's existing systems actually looks like, system by
+  system (ERP export quality, MES event granularity, whether QMS/IoT data
+  exists at all, how much lives only in spreadsheets) — this was not
+  investigated for any specific real customer in this gate.
+- What useful intelligence can be produced from that realistic minimum, as
+  distinct from the best-case data assumed in several of the capability
+  entries above.
+- Whether integrating with LENS ERP specifically (where a customer already
+  runs it) provides any measurable advantage over integrating with a
+  third-party ERP/MES — this was assumed favorably in the original draft
+  and is now treated as an open question rather than a given.
+
+These four points, not a specific architecture, are the load-bearing
+uncertainty this correction leaves for future gates to resolve — starting
+with the "Proposed Next Gate" experiment above, which should be read as
+testing data realism in general, not testing LENSIPS-as-ERP specifically.
