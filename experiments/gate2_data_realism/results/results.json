@@ -1,0 +1,372 @@
+{
+  "baseline": {
+    "performance": {
+      "n_cases": 225,
+      "n_events": 4543,
+      "n_activities_observed": 55,
+      "n_negative_duration_events": 0,
+      "mean_case_duration_hours": 494.88,
+      "median_case_duration_hours": 333.63,
+      "top5_bottleneck_activities_by_total_time": [
+        "Turning & Milling - Machine 4",
+        "Turning & Milling - Machine 5",
+        "Turning & Milling - Machine 6",
+        "Final Inspection Q.C.",
+        "Round Grinding - Machine 3"
+      ],
+      "n_resources_observed": 31,
+      "pct_events_missing_resource": 0.0,
+      "top5_bottleneck_resources_by_total_time": [
+        "Quality Check 1",
+        "Machine 4 - Turning & Milling",
+        "Machine 5 - Turning & Milling",
+        "Machine 6 - Turning & Milling",
+        "Machine 2 - Round Grinding"
+      ]
+    },
+    "conformance_vs_baseline_reference_model": {
+      "average_trace_fitness": 0.9991,
+      "log_fitness": 0.999,
+      "percentage_of_fitting_traces": 84.89
+    },
+    "own_discovered_model_size": {
+      "n_places": 129,
+      "n_transitions": 211,
+      "n_arcs": 450
+    },
+    "top5_bottleneck_overlap_with_baseline": [
+      "Final Inspection Q.C.",
+      "Round Grinding - Machine 3",
+      "Turning & Milling - Machine 4",
+      "Turning & Milling - Machine 5",
+      "Turning & Milling - Machine 6"
+    ],
+    "top1_bottleneck_matches_baseline": true,
+    "top5_resource_bottleneck_overlap_with_baseline": [
+      "Machine 2 - Round Grinding",
+      "Machine 4 - Turning & Milling",
+      "Machine 5 - Turning & Milling",
+      "Machine 6 - Turning & Milling",
+      "Quality Check 1"
+    ],
+    "top1_resource_bottleneck_matches_baseline": true,
+    "case_retention_pct": 100.0,
+    "event_retention_pct": 100.0
+  },
+  "milestone_only": {
+    "performance": {
+      "n_cases": 225,
+      "n_events": 444,
+      "n_activities_observed": 36,
+      "n_negative_duration_events": 0,
+      "mean_case_duration_hours": 494.78,
+      "median_case_duration_hours": 330.0,
+      "top5_bottleneck_activities_by_total_time": [
+        "Turning & Milling - Machine 4",
+        "Turning & Milling - Machine 6",
+        "Turning & Milling - Machine 5",
+        "Final Inspection Q.C.",
+        "Turning & Milling - Machine 8"
+      ],
+      "n_resources_observed": 21,
+      "pct_events_missing_resource": 0.0,
+      "top5_bottleneck_resources_by_total_time": [
+        "Quality Check 1",
+        "Machine 4 - Turning & Milling",
+        "Machine 6 - Turning & Milling",
+        "Machine 5 - Turning & Milling",
+        "Machine 8 - Turning & Milling"
+      ]
+    },
+    "conformance_vs_baseline_reference_model": {
+      "average_trace_fitness": 1.0,
+      "log_fitness": 0.9999,
+      "percentage_of_fitting_traces": 99.56
+    },
+    "own_discovered_model_size": {
+      "n_places": 47,
+      "n_transitions": 94,
+      "n_arcs": 196
+    },
+    "top5_bottleneck_overlap_with_baseline": [
+      "Final Inspection Q.C.",
+      "Turning & Milling - Machine 4",
+      "Turning & Milling - Machine 5",
+      "Turning & Milling - Machine 6"
+    ],
+    "top1_bottleneck_matches_baseline": true,
+    "top5_resource_bottleneck_overlap_with_baseline": [
+      "Machine 4 - Turning & Milling",
+      "Machine 5 - Turning & Milling",
+      "Machine 6 - Turning & Milling",
+      "Quality Check 1"
+    ],
+    "top1_resource_bottleneck_matches_baseline": true,
+    "case_retention_pct": 100.0,
+    "event_retention_pct": 9.8
+  },
+  "missing_timestamps_30pct": {
+    "performance": {
+      "n_cases": 222,
+      "n_events": 3181,
+      "n_activities_observed": 52,
+      "n_negative_duration_events": 0,
+      "mean_case_duration_hours": 469.73,
+      "median_case_duration_hours": 290.78,
+      "top5_bottleneck_activities_by_total_time": [
+        "Turning & Milling - Machine 4",
+        "Turning & Milling - Machine 5",
+        "Turning & Milling - Machine 6",
+        "Round Grinding - Machine 3",
+        "Final Inspection Q.C."
+      ],
+      "n_resources_observed": 29,
+      "pct_events_missing_resource": 0.0,
+      "top5_bottleneck_resources_by_total_time": [
+        "Quality Check 1",
+        "Machine 4 - Turning & Milling",
+        "Machine 5 - Turning & Milling",
+        "Machine 6 - Turning & Milling",
+        "Machine 3 - Round Grinding"
+      ]
+    },
+    "conformance_vs_baseline_reference_model": {
+      "average_trace_fitness": 0.999,
+      "log_fitness": 0.999,
+      "percentage_of_fitting_traces": 87.39
+    },
+    "own_discovered_model_size": {
+      "n_places": 176,
+      "n_transitions": 270,
+      "n_arcs": 578
+    },
+    "top5_bottleneck_overlap_with_baseline": [
+      "Final Inspection Q.C.",
+      "Round Grinding - Machine 3",
+      "Turning & Milling - Machine 4",
+      "Turning & Milling - Machine 5",
+      "Turning & Milling - Machine 6"
+    ],
+    "top1_bottleneck_matches_baseline": true,
+    "top5_resource_bottleneck_overlap_with_baseline": [
+      "Machine 4 - Turning & Milling",
+      "Machine 5 - Turning & Milling",
+      "Machine 6 - Turning & Milling",
+      "Quality Check 1"
+    ],
+    "top1_resource_bottleneck_matches_baseline": true,
+    "case_retention_pct": 98.7,
+    "event_retention_pct": 70.0
+  },
+  "missing_resource_40pct": {
+    "performance": {
+      "n_cases": 225,
+      "n_events": 4543,
+      "n_activities_observed": 55,
+      "n_negative_duration_events": 0,
+      "mean_case_duration_hours": 494.88,
+      "median_case_duration_hours": 333.63,
+      "top5_bottleneck_activities_by_total_time": [
+        "Turning & Milling - Machine 4",
+        "Turning & Milling - Machine 5",
+        "Turning & Milling - Machine 6",
+        "Final Inspection Q.C.",
+        "Round Grinding - Machine 3"
+      ],
+      "n_resources_observed": 29,
+      "pct_events_missing_resource": 40.0,
+      "top5_bottleneck_resources_by_total_time": [
+        "Quality Check 1",
+        "Machine 4 - Turning & Milling",
+        "Machine 5 - Turning & Milling",
+        "Machine 6 - Turning & Milling",
+        "Machine 3 - Round Grinding"
+      ]
+    },
+    "conformance_vs_baseline_reference_model": {
+      "average_trace_fitness": 0.9991,
+      "log_fitness": 0.999,
+      "percentage_of_fitting_traces": 84.89
+    },
+    "own_discovered_model_size": {
+      "n_places": 129,
+      "n_transitions": 211,
+      "n_arcs": 450
+    },
+    "top5_bottleneck_overlap_with_baseline": [
+      "Final Inspection Q.C.",
+      "Round Grinding - Machine 3",
+      "Turning & Milling - Machine 4",
+      "Turning & Milling - Machine 5",
+      "Turning & Milling - Machine 6"
+    ],
+    "top1_bottleneck_matches_baseline": true,
+    "top5_resource_bottleneck_overlap_with_baseline": [
+      "Machine 4 - Turning & Milling",
+      "Machine 5 - Turning & Milling",
+      "Machine 6 - Turning & Milling",
+      "Quality Check 1"
+    ],
+    "top1_resource_bottleneck_matches_baseline": true,
+    "case_retention_pct": 100.0,
+    "event_retention_pct": 100.0
+  },
+  "incomplete_relationships_30pct": {
+    "performance": {
+      "n_cases": 225,
+      "n_events": 3411,
+      "n_activities_observed": 53,
+      "n_negative_duration_events": 0,
+      "mean_case_duration_hours": 494.82,
+      "median_case_duration_hours": 330.0,
+      "top5_bottleneck_activities_by_total_time": [
+        "Turning & Milling - Machine 4",
+        "Turning & Milling - Machine 6",
+        "Turning & Milling - Machine 5",
+        "Round Grinding - Machine 2",
+        "Final Inspection Q.C."
+      ],
+      "n_resources_observed": 30,
+      "pct_events_missing_resource": 0.0,
+      "top5_bottleneck_resources_by_total_time": [
+        "Quality Check 1",
+        "Machine 4 - Turning & Milling",
+        "Machine 5 - Turning & Milling",
+        "Machine 6 - Turning & Milling",
+        "Machine 2 - Round Grinding"
+      ]
+    },
+    "conformance_vs_baseline_reference_model": {
+      "average_trace_fitness": 0.9989,
+      "log_fitness": 0.9989,
+      "percentage_of_fitting_traces": 86.22
+    },
+    "own_discovered_model_size": {
+      "n_places": 109,
+      "n_transitions": 178,
+      "n_arcs": 384
+    },
+    "top5_bottleneck_overlap_with_baseline": [
+      "Final Inspection Q.C.",
+      "Turning & Milling - Machine 4",
+      "Turning & Milling - Machine 5",
+      "Turning & Milling - Machine 6"
+    ],
+    "top1_bottleneck_matches_baseline": true,
+    "top5_resource_bottleneck_overlap_with_baseline": [
+      "Machine 2 - Round Grinding",
+      "Machine 4 - Turning & Milling",
+      "Machine 5 - Turning & Milling",
+      "Machine 6 - Turning & Milling",
+      "Quality Check 1"
+    ],
+    "top1_resource_bottleneck_matches_baseline": true,
+    "case_retention_pct": 100.0,
+    "event_retention_pct": 75.1
+  },
+  "inconsistent_records_10pct": {
+    "performance": {
+      "n_cases": 225,
+      "n_events": 4997,
+      "n_activities_observed": 55,
+      "n_negative_duration_events": 149,
+      "mean_case_duration_hours": 494.81,
+      "median_case_duration_hours": 333.63,
+      "top5_bottleneck_activities_by_total_time": [
+        "Turning & Milling - Machine 5",
+        "Turning & Milling - Machine 4",
+        "Turning & Milling - Machine 6",
+        "Final Inspection Q.C.",
+        "Round Grinding - Machine 2"
+      ],
+      "n_resources_observed": 31,
+      "pct_events_missing_resource": 0.0,
+      "top5_bottleneck_resources_by_total_time": [
+        "Quality Check 1",
+        "Machine 5 - Turning & Milling",
+        "Machine 4 - Turning & Milling",
+        "Machine 6 - Turning & Milling",
+        "Machine 2 - Round Grinding"
+      ]
+    },
+    "conformance_vs_baseline_reference_model": {
+      "average_trace_fitness": 0.9989,
+      "log_fitness": 0.9989,
+      "percentage_of_fitting_traces": 84.0
+    },
+    "own_discovered_model_size": {
+      "n_places": 139,
+      "n_transitions": 226,
+      "n_arcs": 480
+    },
+    "top5_bottleneck_overlap_with_baseline": [
+      "Final Inspection Q.C.",
+      "Turning & Milling - Machine 4",
+      "Turning & Milling - Machine 5",
+      "Turning & Milling - Machine 6"
+    ],
+    "top1_bottleneck_matches_baseline": false,
+    "top5_resource_bottleneck_overlap_with_baseline": [
+      "Machine 2 - Round Grinding",
+      "Machine 4 - Turning & Milling",
+      "Machine 5 - Turning & Milling",
+      "Machine 6 - Turning & Milling",
+      "Quality Check 1"
+    ],
+    "top1_resource_bottleneck_matches_baseline": true,
+    "case_retention_pct": 100.0,
+    "event_retention_pct": 110.0
+  },
+  "missing_quality_events": {
+    "performance": {
+      "n_cases": 220,
+      "n_events": 3349,
+      "n_activities_observed": 47,
+      "n_negative_duration_events": 0,
+      "mean_case_duration_hours": 472.98,
+      "median_case_duration_hours": 331.82,
+      "top5_bottleneck_activities_by_total_time": [
+        "Turning & Milling - Machine 4",
+        "Turning & Milling - Machine 5",
+        "Turning & Milling - Machine 6",
+        "Round Grinding - Machine 3",
+        "Round Grinding - Machine 2"
+      ],
+      "n_resources_observed": 30,
+      "pct_events_missing_resource": 0.0,
+      "top5_bottleneck_resources_by_total_time": [
+        "Machine 4 - Turning & Milling",
+        "Machine 5 - Turning & Milling",
+        "Machine 6 - Turning & Milling",
+        "Machine 2 - Round Grinding",
+        "Machine 3 - Round Grinding"
+      ]
+    },
+    "conformance_vs_baseline_reference_model": {
+      "average_trace_fitness": 0.9992,
+      "log_fitness": 0.9991,
+      "percentage_of_fitting_traces": 84.55
+    },
+    "own_discovered_model_size": {
+      "n_places": 105,
+      "n_transitions": 179,
+      "n_arcs": 378
+    },
+    "top5_bottleneck_overlap_with_baseline": [
+      "Round Grinding - Machine 3",
+      "Turning & Milling - Machine 4",
+      "Turning & Milling - Machine 5",
+      "Turning & Milling - Machine 6"
+    ],
+    "top1_bottleneck_matches_baseline": true,
+    "top5_resource_bottleneck_overlap_with_baseline": [
+      "Machine 2 - Round Grinding",
+      "Machine 4 - Turning & Milling",
+      "Machine 5 - Turning & Milling",
+      "Machine 6 - Turning & Milling"
+    ],
+    "top1_resource_bottleneck_matches_baseline": false,
+    "case_retention_pct": 97.8,
+    "event_retention_pct": 73.7
+  }
+}

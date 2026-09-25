@@ -132,8 +132,10 @@ Time to value: MEDIUM, revised from the original rating to reflect the
             added integration scope — could be LONG per customer if their
             system landscape is unusually fragmented
 Differentiation: MEDIUM-HIGH — revised down from the original HIGH rating.
-            The customer problem is a genuine, evidenced gap (Rule 4
-            applies: low technology evidence does not mean WON'T), but the
+            This is a potential product opportunity supported by an
+            evidenced customer problem (Rule 4 applies: low technology
+            evidence does not mean WON'T); whether it is genuine
+            competitive whitespace remains unproven. The
             original claim that LENSIPS's ERP position made this cheaper to
             build is removed; differentiation must instead come from
             deliberately narrower scope (specific systems, specific

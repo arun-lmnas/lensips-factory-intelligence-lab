@@ -11,12 +11,21 @@ hypothesis. Read it before doing anything else here.
 - **Gate 1** (reference architecture, enterprise evidence, and LENSIPS
   capability selection) is done — see
   [reports/CAPABILITY_PORTFOLIO.md](reports/CAPABILITY_PORTFOLIO.md) for
-  the MUST/SHOULD/COULD/WON'T decisions and the recommended next
-  experiment, and [reports/LENSIPS_GAP_ANALYSIS.md](reports/LENSIPS_GAP_ANALYSIS.md)
-  for the reasoning behind them. No implementation happened in Gate 1 —
-  it produced research/evidence artifacts only.
+  the MUST/SHOULD/COULD/WON'T decisions, its "Corrected LENSIPS
+  Positioning" section (LENSIPS is not assumed to be the customer's ERP),
+  and the recommended next experiment. No implementation happened in
+  Gate 1 — it produced research/evidence artifacts only.
+- **Gate 2** (data realism experiment) is done — see
+  [reports/GATE2_DATA_REALISM_EXPERIMENT.md](reports/GATE2_DATA_REALISM_EXPERIMENT.md).
+  Ran PM4Py discovery/conformance/performance analysis against a real
+  manufacturing event log under synthetic data-degradation scenarios; the
+  key finding is that conformance/fitness scores are not a usable proxy
+  for data completeness, and that a category-level coverage check (e.g.
+  "were quality-inspection events observed at all?") is needed to catch
+  findings that silently vanish under realistic data gaps. Reproducible
+  script: [experiments/gate2_data_realism/run_experiment.py](experiments/gate2_data_realism/run_experiment.py).
 
-Do not start Gate 2 or later without explicit instruction — see README.md
+Do not start Gate 3 or later without explicit instruction — see README.md
 section 12 for the gate sequence.
 
 ## Ground rules for every task in this repo

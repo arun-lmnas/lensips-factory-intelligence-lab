@@ -78,7 +78,10 @@ below, rather than forcing a predetermined architecture.
   (evidence #12, #17), a capability that explicitly reports "what we know,
   what we inferred, what's missing, and how confident we are" — across
   *whichever* of the customer's systems actually hold the relevant data —
-  appears to be a real, evidenced gap rather than a hypothesis. **Note:**
+  appears to be a potential product opportunity supported by an evidenced
+  customer problem; whether this is genuine competitive whitespace (i.e.
+  that no existing platform could simply add this) remains unproven.
+  **Note:**
   this reframes the earlier draft of this report, which incorrectly
   assumed LENSIPS already sits inside the data as the customer's ERP. That
   assumption is corrected here: LENSIPS must integrate with whatever
@@ -87,9 +90,12 @@ below, rather than forcing a predetermined architecture.
   absorb is itself `INSUFFICIENT EVIDENCE` — see the "Corrected LENSIPS
   Positioning" section of [CAPABILITY_PORTFOLIO.md](CAPABILITY_PORTFOLIO.md).
 - **A right-sized process/factory intelligence capability for medium
-  manufacturers**, at a cost and implementation-effort point far below
-  Celonis/Signavio, that works across a customer's existing system
-  landscape rather than requiring a full enterprise data estate. Unlike the
+  manufacturers**, with a narrower intended scope than Celonis/Signavio
+  (one manufacturer's core planning and production processes, not
+  cross-enterprise orchestration), that works across a customer's existing
+  system landscape rather than requiring a full enterprise data estate. Any
+  resulting cost or implementation-effort advantage over Celonis/Signavio
+  remains unproven. Unlike the
   original draft's assumption, this is *not* justified by LENSIPS already
   owning the data — no evidence supports that as LENSIPS's positioning (see
   CAPABILITY_PORTFOLIO.md's "Corrected LENSIPS Positioning"). The
