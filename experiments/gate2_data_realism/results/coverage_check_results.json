@@ -1,0 +1,142 @@
+{
+  "baseline": {
+    "quality_inspection": {
+      "expected_count": 1194,
+      "observed_count": 1194,
+      "coverage_pct": 100.0,
+      "flag": "OK"
+    },
+    "turning_milling": {
+      "expected_count": 1794,
+      "observed_count": 1794,
+      "coverage_pct": 100.0,
+      "flag": "OK"
+    },
+    "packing": {
+      "expected_count": 277,
+      "observed_count": 277,
+      "coverage_pct": 100.0,
+      "flag": "OK"
+    }
+  },
+  "milestone_only": {
+    "quality_inspection": {
+      "expected_count": 1194,
+      "observed_count": 137,
+      "coverage_pct": 11.5,
+      "flag": "SEVERELY_DEGRADED"
+    },
+    "turning_milling": {
+      "expected_count": 1794,
+      "observed_count": 190,
+      "coverage_pct": 10.6,
+      "flag": "SEVERELY_DEGRADED"
+    },
+    "packing": {
+      "expected_count": 277,
+      "observed_count": 80,
+      "coverage_pct": 28.9,
+      "flag": "OK"
+    }
+  },
+  "missing_timestamps_30pct": {
+    "quality_inspection": {
+      "expected_count": 1194,
+      "observed_count": 837,
+      "coverage_pct": 70.1,
+      "flag": "OK"
+    },
+    "turning_milling": {
+      "expected_count": 1794,
+      "observed_count": 1276,
+      "coverage_pct": 71.1,
+      "flag": "OK"
+    },
+    "packing": {
+      "expected_count": 277,
+      "observed_count": 189,
+      "coverage_pct": 68.2,
+      "flag": "OK"
+    }
+  },
+  "missing_resource_40pct": {
+    "quality_inspection": {
+      "expected_count": 1194,
+      "observed_count": 1194,
+      "coverage_pct": 100.0,
+      "flag": "OK"
+    },
+    "turning_milling": {
+      "expected_count": 1794,
+      "observed_count": 1794,
+      "coverage_pct": 100.0,
+      "flag": "OK"
+    },
+    "packing": {
+      "expected_count": 277,
+      "observed_count": 277,
+      "coverage_pct": 100.0,
+      "flag": "OK"
+    }
+  },
+  "incomplete_relationships_30pct": {
+    "quality_inspection": {
+      "expected_count": 1194,
+      "observed_count": 920,
+      "coverage_pct": 77.1,
+      "flag": "OK"
+    },
+    "turning_milling": {
+      "expected_count": 1794,
+      "observed_count": 1364,
+      "coverage_pct": 76.0,
+      "flag": "OK"
+    },
+    "packing": {
+      "expected_count": 277,
+      "observed_count": 233,
+      "coverage_pct": 84.1,
+      "flag": "OK"
+    }
+  },
+  "inconsistent_records_10pct": {
+    "quality_inspection": {
+      "expected_count": 1194,
+      "observed_count": 1312,
+      "coverage_pct": 109.9,
+      "flag": "OK"
+    },
+    "turning_milling": {
+      "expected_count": 1794,
+      "observed_count": 1975,
+      "coverage_pct": 110.1,
+      "flag": "OK"
+    },
+    "packing": {
+      "expected_count": 277,
+      "observed_count": 304,
+      "coverage_pct": 109.7,
+      "flag": "OK"
+    }
+  },
+  "missing_quality_events": {
+    "quality_inspection": {
+      "expected_count": 1194,
+      "observed_count": 0,
+      "coverage_pct": 0.0,
+      "flag": "MISSING"
+    },
+    "turning_milling": {
+      "expected_count": 1794,
+      "observed_count": 1272,
+      "coverage_pct": 70.9,
+      "flag": "OK"
+    },
+    "packing": {
+      "expected_count": 277,
+      "observed_count": 277,
+      "coverage_pct": 100.0,
+      "flag": "OK"
+    }
+  }
+}

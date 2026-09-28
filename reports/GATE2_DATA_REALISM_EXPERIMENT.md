@@ -274,3 +274,63 @@ no warning from any metric already in use). Concretely:
 This does not require a new dataset, does not require OCEL/digital
 twin/LLM work, and can be evaluated against the artifacts already produced
 in this gate.
+
+## 9. Follow-up: coverage-check validation (completed)
+
+The experiment proposed in §8 was carried out. Script:
+[experiments/gate2_data_realism/coverage_check_experiment.py](../experiments/gate2_data_realism/coverage_check_experiment.py),
+reusing the exact scenario-generation code from `run_experiment.py`. Full
+results: [experiments/gate2_data_realism/results/coverage_check_results.json](../experiments/gate2_data_realism/results/coverage_check_results.json).
+
+**Design**: for three activity categories — `quality_inspection` (the
+category degraded by `missing_quality_events`), and two controls,
+`turning_milling` (high-volume) and `packing` (low-volume, final step) —
+compare each scenario's observed event count for that category against the
+baseline's count, and flag `MISSING` (0% observed), `SEVERELY_DEGRADED`
+(<20% observed), or `OK`.
+
+**Result: yes, it caught the gap.** In `missing_quality_events`, the check
+correctly flagged `quality_inspection` as `MISSING` (0 of 1,194 baseline
+events observed, 0.0% coverage) — exactly the finding that
+`run_experiment.py`'s fitness score (0.9992, indistinguishable from
+baseline's 0.9991) gave no signal of. The two control categories were
+correctly left `OK` in that same scenario (`turning_milling` 70.9%
+coverage, `packing` 100% coverage), confirming the check is specific to the
+degraded category and does not over-flag unrelated ones.
+
+**Unplanned but valuable result: the check is more discriminating than the
+top-line bottleneck ranking.** In `milestone_only` — the scenario where
+§4's Finding 4 showed the top-1 bottleneck ranking survived, and fitness
+was a perfect 1.0000 — the coverage check flagged **both**
+`quality_inspection` (11.5% coverage) and `turning_milling` (10.6%
+coverage) as `SEVERELY_DEGRADED`. This is not a false positive: it is an
+accurate report that the evidence behind the milestone-only finding was
+genuinely thin, even though the point estimate (which activity is #1)
+happened to still be correct. **This is exactly the distinction Finding 1
+said was missing**: a bottleneck finding "backed by 100% coverage" now
+looks visibly different, in this check's output, from one "backed by 11%
+coverage," even when both scenarios' top-line ranking and fitness score
+looked equally confident. No other scenario tested produced a
+`SEVERELY_DEGRADED` or `MISSING` flag on `turning_milling` or `packing`,
+so this was not a check that fires indiscriminately.
+
+**Conclusion**: a category-level coverage check, even in this minimal
+form (substring match + count ratio, no NLP or configuration beyond a
+short list of category names), is sufficient to catch the specific failure
+mode this gate set out to find, and additionally surfaces low-confidence-
+but-correct findings that fitness-based and point-estimate-based reporting
+alone would present with false confidence. This is now direct, tested
+evidence — not just an inference from Gate 1 — for building the
+Integration/Reliability Layer around explicit per-category coverage
+checks, as recommended in
+[CAPABILITY_PORTFOLIO.md](CAPABILITY_PORTFOLIO.md).
+
+**Remaining limitations specific to this follow-up**: the category
+definitions (`quality_inspection`, `turning_milling`, `packing`) were
+hand-picked from this dataset's known activity names; a real
+implementation would need a principled way to define "decision-relevant
+categories" for an arbitrary customer's process, which was not addressed
+here. The 20% "severely degraded" threshold was chosen for illustration,
+not derived from any evidence about what threshold matters for real
+decisions. Both are reasonable candidates for a future gate, not resolved
+by this one.
