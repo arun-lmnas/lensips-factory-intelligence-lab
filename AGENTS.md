@@ -24,8 +24,18 @@ hypothesis. Read it before doing anything else here.
   "were quality-inspection events observed at all?") is needed to catch
   findings that silently vanish under realistic data gaps. Reproducible
   script: [experiments/gate2_data_realism/run_experiment.py](experiments/gate2_data_realism/run_experiment.py).
+- **Gate 3** (evidence-grounded factory finding) is done — see
+  [reports/GATE3_EVIDENCE_GROUNDED_FINDINGS.md](reports/GATE3_EVIDENCE_GROUNDED_FINDINGS.md).
+  Defined 3 concrete factory questions (bottleneck, quality/rework issue,
+  abnormal step performance), ran Gate 2's category-coverage mechanism
+  against the Gate 2 degraded datasets to gate each question's confidence
+  status, and confirmed the system withholds a finding (quality/rework,
+  abnormal step) in the `missing_quality_events` scenario even though the
+  bottleneck finding on the same dataset still runs and reports high
+  confidence. Reproducible script:
+  [experiments/gate3_evidence_grounded_findings/run_experiment.py](experiments/gate3_evidence_grounded_findings/run_experiment.py).
 
-Do not start Gate 3 or later without explicit instruction — see README.md
+Do not start Gate 4 or later without explicit instruction — see README.md
 section 12 for the gate sequence.
 
 ## Ground rules for every task in this repo
