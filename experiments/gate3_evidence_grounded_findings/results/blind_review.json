@@ -1,0 +1,786 @@
+{
+  "baseline": {
+    "bottleneck": {
+      "question": "What is the bottleneck (activity and resource)?",
+      "finding": "Candidate bottleneck activity: 'Turning & Milling - Machine 4'. Candidate bottleneck resource: 'Quality Check 1'.",
+      "supporting_evidence": {
+        "top5_bottleneck_activities_by_total_time": [
+          "Turning & Milling - Machine 4",
+          "Turning & Milling - Machine 5",
+          "Turning & Milling - Machine 6",
+          "Final Inspection Q.C.",
+          "Round Grinding - Machine 3"
+        ],
+        "top5_bottleneck_resources_by_total_time": [
+          "Quality Check 1",
+          "Machine 4 - Turning & Milling",
+          "Machine 5 - Turning & Milling",
+          "Machine 6 - Turning & Milling",
+          "Machine 2 - Round Grinding"
+        ],
+        "n_events": 4543,
+        "n_cases": 225
+      },
+      "evidence_coverage": {
+        "activity:Turning & Milling - Machine 4": {
+          "expected_count": 262,
+          "observed_count": 262,
+          "coverage_pct": 100.0,
+          "flag": "OK"
+        },
+        "resource:Quality Check 1": {
+          "expected_count": 1193,
+          "observed_count": 1193,
+          "coverage_pct": 100.0,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Bottleneck is proxied by total recorded activity duration, not by queueing/waiting time or true resource utilization rate (out of scope per Gate 2 section 7).",
+        "Evidence coverage here is computed only for the specific activity/resource that happens to rank #1 in this scenario, not for every activity/resource in the process."
+      ]
+    },
+    "quality_rework": {
+      "question": "Is quality/rework a significant issue in this process?",
+      "finding": "Quality/rework signal observed: 1194 quality-inspection events, 0 rework-flagged events, 231 events with rejected quantity > 0.",
+      "supporting_evidence": {
+        "quality_inspection_events": 1194,
+        "rework_flagged_events": 0,
+        "rejected_qty_events": 231
+      },
+      "evidence_coverage": {
+        "quality_inspection_events": {
+          "expected_count": 1194,
+          "observed_count": 1194,
+          "coverage_pct": 100.0,
+          "flag": "OK"
+        },
+        "rework_flagged_events": {
+          "expected_count": 0,
+          "observed_count": 0,
+          "coverage_pct": null,
+          "flag": "NOT_APPLICABLE"
+        },
+        "rejected_qty_events": {
+          "expected_count": 231,
+          "observed_count": 231,
+          "coverage_pct": 100.0,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Category membership is determined by activity-name substring match (Q.C./Inspection/MRB) and a boolean Rework/Qty Rejected field, not a validated quality taxonomy.",
+        "This question is the one Gate 2 section 4 (missing_quality_events scenario) specifically showed can silently vanish from a fitness-score-only or ranking-only report; it is included here specifically to test whether the withholding behavior fires."
+      ]
+    },
+    "abnormal_step": {
+      "question": "Is 'Final Inspection Q.C.' showing abnormal performance (duration)?",
+      "finding": "'Final Inspection Q.C.' does not show abnormal performance in this dataset (mean duration 114.8 min vs. baseline 114.8 min).",
+      "supporting_evidence": {
+        "variant_mean_duration_min": 114.8,
+        "baseline_mean_duration_min": 114.8,
+        "ratio_vs_baseline": 1.0,
+        "variant_event_count": 550,
+        "baseline_event_count": 550
+      },
+      "evidence_coverage": {
+        "activity:Final Inspection Q.C.": {
+          "expected_count": 550,
+          "observed_count": 550,
+          "coverage_pct": 100.0,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Fixed to a single, hand-picked target activity ('Final Inspection Q.C.') for this experiment; a real implementation would need to run this check per-activity, not on one preselected step.",
+        "The 20-event minimum-sample-size threshold and the 1.5x abnormality threshold are illustrative choices for this experiment, not derived from any statistical power analysis or domain evidence."
+      ]
+    }
+  },
+  "milestone_only": {
+    "bottleneck": {
+      "question": "What is the bottleneck (activity and resource)?",
+      "finding": "Candidate bottleneck activity: 'Turning & Milling - Machine 4'. Candidate bottleneck resource: 'Quality Check 1'.",
+      "supporting_evidence": {
+        "top5_bottleneck_activities_by_total_time": [
+          "Turning & Milling - Machine 4",
+          "Turning & Milling - Machine 6",
+          "Turning & Milling - Machine 5",
+          "Final Inspection Q.C.",
+          "Turning & Milling - Machine 8"
+        ],
+        "top5_bottleneck_resources_by_total_time": [
+          "Quality Check 1",
+          "Machine 4 - Turning & Milling",
+          "Machine 6 - Turning & Milling",
+          "Machine 5 - Turning & Milling",
+          "Machine 8 - Turning & Milling"
+        ],
+        "n_events": 444,
+        "n_cases": 225
+      },
+      "evidence_coverage": {
+        "activity:Turning & Milling - Machine 4": {
+          "expected_count": 262,
+          "observed_count": 31,
+          "coverage_pct": 11.8,
+          "flag": "SEVERELY_DEGRADED"
+        },
+        "resource:Quality Check 1": {
+          "expected_count": 1193,
+          "observed_count": 137,
+          "coverage_pct": 11.5,
+          "flag": "SEVERELY_DEGRADED"
+        }
+      },
+      "missing_evidence": [
+        "Evidence for activity:Turning & Milling - Machine 4 is SEVERELY_DEGRADED (31 of 262 baseline events observed, 11.8% coverage) -- the ranking that produced this candidate may not reflect the true bottleneck.",
+        "Evidence for resource:Quality Check 1 is SEVERELY_DEGRADED (137 of 1193 baseline events observed, 11.5% coverage) -- the ranking that produced this candidate may not reflect the true bottleneck."
+      ],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Bottleneck is proxied by total recorded activity duration, not by queueing/waiting time or true resource utilization rate (out of scope per Gate 2 section 7).",
+        "Evidence coverage here is computed only for the specific activity/resource that happens to rank #1 in this scenario, not for every activity/resource in the process."
+      ]
+    },
+    "quality_rework": {
+      "question": "Is quality/rework a significant issue in this process?",
+      "finding": "Quality/rework signal observed: 137 quality-inspection events, 0 rework-flagged events, 33 events with rejected quantity > 0.",
+      "supporting_evidence": {
+        "quality_inspection_events": 137,
+        "rework_flagged_events": 0,
+        "rejected_qty_events": 33
+      },
+      "evidence_coverage": {
+        "quality_inspection_events": {
+          "expected_count": 1194,
+          "observed_count": 137,
+          "coverage_pct": 11.5,
+          "flag": "SEVERELY_DEGRADED"
+        },
+        "rework_flagged_events": {
+          "expected_count": 0,
+          "observed_count": 0,
+          "coverage_pct": null,
+          "flag": "NOT_APPLICABLE"
+        },
+        "rejected_qty_events": {
+          "expected_count": 231,
+          "observed_count": 33,
+          "coverage_pct": 14.3,
+          "flag": "SEVERELY_DEGRADED"
+        }
+      },
+      "missing_evidence": [
+        "quality_inspection_events: SEVERELY_DEGRADED (137 of 1194 baseline events observed, 11.5% coverage)",
+        "rejected_qty_events: SEVERELY_DEGRADED (33 of 231 baseline events observed, 14.3% coverage)"
+      ],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Category membership is determined by activity-name substring match (Q.C./Inspection/MRB) and a boolean Rework/Qty Rejected field, not a validated quality taxonomy.",
+        "This question is the one Gate 2 section 4 (missing_quality_events scenario) specifically showed can silently vanish from a fitness-score-only or ranking-only report; it is included here specifically to test whether the withholding behavior fires."
+      ]
+    },
+    "abnormal_step": {
+      "question": "Is 'Final Inspection Q.C.' showing abnormal performance (duration)?",
+      "finding": "'Final Inspection Q.C.' does not show abnormal performance in this dataset (mean duration 74.2 min vs. baseline 114.8 min).",
+      "supporting_evidence": {
+        "variant_mean_duration_min": 74.2,
+        "baseline_mean_duration_min": 114.8,
+        "ratio_vs_baseline": 0.65,
+        "variant_event_count": 88,
+        "baseline_event_count": 550
+      },
+      "evidence_coverage": {
+        "activity:Final Inspection Q.C.": {
+          "expected_count": 550,
+          "observed_count": 88,
+          "coverage_pct": 16.0,
+          "flag": "SEVERELY_DEGRADED"
+        }
+      },
+      "missing_evidence": [
+        "Coverage of 'Final Inspection Q.C.' events is SEVERELY_DEGRADED in this dataset."
+      ],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Fixed to a single, hand-picked target activity ('Final Inspection Q.C.') for this experiment; a real implementation would need to run this check per-activity, not on one preselected step.",
+        "The 20-event minimum-sample-size threshold and the 1.5x abnormality threshold are illustrative choices for this experiment, not derived from any statistical power analysis or domain evidence."
+      ]
+    }
+  },
+  "missing_timestamps_30pct": {
+    "bottleneck": {
+      "question": "What is the bottleneck (activity and resource)?",
+      "finding": "Candidate bottleneck activity: 'Turning & Milling - Machine 4'. Candidate bottleneck resource: 'Quality Check 1'.",
+      "supporting_evidence": {
+        "top5_bottleneck_activities_by_total_time": [
+          "Turning & Milling - Machine 4",
+          "Turning & Milling - Machine 5",
+          "Turning & Milling - Machine 6",
+          "Round Grinding - Machine 3",
+          "Final Inspection Q.C."
+        ],
+        "top5_bottleneck_resources_by_total_time": [
+          "Quality Check 1",
+          "Machine 4 - Turning & Milling",
+          "Machine 5 - Turning & Milling",
+          "Machine 6 - Turning & Milling",
+          "Machine 3 - Round Grinding"
+        ],
+        "n_events": 3181,
+        "n_cases": 222
+      },
+      "evidence_coverage": {
+        "activity:Turning & Milling - Machine 4": {
+          "expected_count": 262,
+          "observed_count": 191,
+          "coverage_pct": 72.9,
+          "flag": "OK"
+        },
+        "resource:Quality Check 1": {
+          "expected_count": 1193,
+          "observed_count": 835,
+          "coverage_pct": 70.0,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Bottleneck is proxied by total recorded activity duration, not by queueing/waiting time or true resource utilization rate (out of scope per Gate 2 section 7).",
+        "Evidence coverage here is computed only for the specific activity/resource that happens to rank #1 in this scenario, not for every activity/resource in the process."
+      ]
+    },
+    "quality_rework": {
+      "question": "Is quality/rework a significant issue in this process?",
+      "finding": "Quality/rework signal observed: 837 quality-inspection events, 0 rework-flagged events, 164 events with rejected quantity > 0.",
+      "supporting_evidence": {
+        "quality_inspection_events": 837,
+        "rework_flagged_events": 0,
+        "rejected_qty_events": 164
+      },
+      "evidence_coverage": {
+        "quality_inspection_events": {
+          "expected_count": 1194,
+          "observed_count": 837,
+          "coverage_pct": 70.1,
+          "flag": "OK"
+        },
+        "rework_flagged_events": {
+          "expected_count": 0,
+          "observed_count": 0,
+          "coverage_pct": null,
+          "flag": "NOT_APPLICABLE"
+        },
+        "rejected_qty_events": {
+          "expected_count": 231,
+          "observed_count": 164,
+          "coverage_pct": 71.0,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Category membership is determined by activity-name substring match (Q.C./Inspection/MRB) and a boolean Rework/Qty Rejected field, not a validated quality taxonomy.",
+        "This question is the one Gate 2 section 4 (missing_quality_events scenario) specifically showed can silently vanish from a fitness-score-only or ranking-only report; it is included here specifically to test whether the withholding behavior fires."
+      ]
+    },
+    "abnormal_step": {
+      "question": "Is 'Final Inspection Q.C.' showing abnormal performance (duration)?",
+      "finding": "'Final Inspection Q.C.' does not show abnormal performance in this dataset (mean duration 114.7 min vs. baseline 114.8 min).",
+      "supporting_evidence": {
+        "variant_mean_duration_min": 114.7,
+        "baseline_mean_duration_min": 114.8,
+        "ratio_vs_baseline": 1.0,
+        "variant_event_count": 377,
+        "baseline_event_count": 550
+      },
+      "evidence_coverage": {
+        "activity:Final Inspection Q.C.": {
+          "expected_count": 550,
+          "observed_count": 377,
+          "coverage_pct": 68.5,
+          "flag": "PARTIAL"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Fixed to a single, hand-picked target activity ('Final Inspection Q.C.') for this experiment; a real implementation would need to run this check per-activity, not on one preselected step.",
+        "The 20-event minimum-sample-size threshold and the 1.5x abnormality threshold are illustrative choices for this experiment, not derived from any statistical power analysis or domain evidence."
+      ]
+    }
+  },
+  "missing_resource_40pct": {
+    "bottleneck": {
+      "question": "What is the bottleneck (activity and resource)?",
+      "finding": "Candidate bottleneck activity: 'Turning & Milling - Machine 4'. Candidate bottleneck resource: 'Quality Check 1'.",
+      "supporting_evidence": {
+        "top5_bottleneck_activities_by_total_time": [
+          "Turning & Milling - Machine 4",
+          "Turning & Milling - Machine 5",
+          "Turning & Milling - Machine 6",
+          "Final Inspection Q.C.",
+          "Round Grinding - Machine 3"
+        ],
+        "top5_bottleneck_resources_by_total_time": [
+          "Quality Check 1",
+          "Machine 4 - Turning & Milling",
+          "Machine 5 - Turning & Milling",
+          "Machine 6 - Turning & Milling",
+          "Machine 3 - Round Grinding"
+        ],
+        "n_events": 4543,
+        "n_cases": 225
+      },
+      "evidence_coverage": {
+        "activity:Turning & Milling - Machine 4": {
+          "expected_count": 262,
+          "observed_count": 262,
+          "coverage_pct": 100.0,
+          "flag": "OK"
+        },
+        "resource:Quality Check 1": {
+          "expected_count": 1193,
+          "observed_count": 715,
+          "coverage_pct": 59.9,
+          "flag": "PARTIAL"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Bottleneck is proxied by total recorded activity duration, not by queueing/waiting time or true resource utilization rate (out of scope per Gate 2 section 7).",
+        "Evidence coverage here is computed only for the specific activity/resource that happens to rank #1 in this scenario, not for every activity/resource in the process."
+      ]
+    },
+    "quality_rework": {
+      "question": "Is quality/rework a significant issue in this process?",
+      "finding": "Quality/rework signal observed: 1194 quality-inspection events, 0 rework-flagged events, 231 events with rejected quantity > 0.",
+      "supporting_evidence": {
+        "quality_inspection_events": 1194,
+        "rework_flagged_events": 0,
+        "rejected_qty_events": 231
+      },
+      "evidence_coverage": {
+        "quality_inspection_events": {
+          "expected_count": 1194,
+          "observed_count": 1194,
+          "coverage_pct": 100.0,
+          "flag": "OK"
+        },
+        "rework_flagged_events": {
+          "expected_count": 0,
+          "observed_count": 0,
+          "coverage_pct": null,
+          "flag": "NOT_APPLICABLE"
+        },
+        "rejected_qty_events": {
+          "expected_count": 231,
+          "observed_count": 231,
+          "coverage_pct": 100.0,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Category membership is determined by activity-name substring match (Q.C./Inspection/MRB) and a boolean Rework/Qty Rejected field, not a validated quality taxonomy.",
+        "This question is the one Gate 2 section 4 (missing_quality_events scenario) specifically showed can silently vanish from a fitness-score-only or ranking-only report; it is included here specifically to test whether the withholding behavior fires."
+      ]
+    },
+    "abnormal_step": {
+      "question": "Is 'Final Inspection Q.C.' showing abnormal performance (duration)?",
+      "finding": "'Final Inspection Q.C.' does not show abnormal performance in this dataset (mean duration 114.8 min vs. baseline 114.8 min).",
+      "supporting_evidence": {
+        "variant_mean_duration_min": 114.8,
+        "baseline_mean_duration_min": 114.8,
+        "ratio_vs_baseline": 1.0,
+        "variant_event_count": 550,
+        "baseline_event_count": 550
+      },
+      "evidence_coverage": {
+        "activity:Final Inspection Q.C.": {
+          "expected_count": 550,
+          "observed_count": 550,
+          "coverage_pct": 100.0,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Fixed to a single, hand-picked target activity ('Final Inspection Q.C.') for this experiment; a real implementation would need to run this check per-activity, not on one preselected step.",
+        "The 20-event minimum-sample-size threshold and the 1.5x abnormality threshold are illustrative choices for this experiment, not derived from any statistical power analysis or domain evidence."
+      ]
+    }
+  },
+  "incomplete_relationships_30pct": {
+    "bottleneck": {
+      "question": "What is the bottleneck (activity and resource)?",
+      "finding": "Candidate bottleneck activity: 'Turning & Milling - Machine 4'. Candidate bottleneck resource: 'Quality Check 1'.",
+      "supporting_evidence": {
+        "top5_bottleneck_activities_by_total_time": [
+          "Turning & Milling - Machine 4",
+          "Turning & Milling - Machine 6",
+          "Turning & Milling - Machine 5",
+          "Round Grinding - Machine 2",
+          "Final Inspection Q.C."
+        ],
+        "top5_bottleneck_resources_by_total_time": [
+          "Quality Check 1",
+          "Machine 4 - Turning & Milling",
+          "Machine 5 - Turning & Milling",
+          "Machine 6 - Turning & Milling",
+          "Machine 2 - Round Grinding"
+        ],
+        "n_events": 3411,
+        "n_cases": 225
+      },
+      "evidence_coverage": {
+        "activity:Turning & Milling - Machine 4": {
+          "expected_count": 262,
+          "observed_count": 189,
+          "coverage_pct": 72.1,
+          "flag": "OK"
+        },
+        "resource:Quality Check 1": {
+          "expected_count": 1193,
+          "observed_count": 918,
+          "coverage_pct": 76.9,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Bottleneck is proxied by total recorded activity duration, not by queueing/waiting time or true resource utilization rate (out of scope per Gate 2 section 7).",
+        "Evidence coverage here is computed only for the specific activity/resource that happens to rank #1 in this scenario, not for every activity/resource in the process."
+      ]
+    },
+    "quality_rework": {
+      "question": "Is quality/rework a significant issue in this process?",
+      "finding": "Quality/rework signal observed: 920 quality-inspection events, 0 rework-flagged events, 180 events with rejected quantity > 0.",
+      "supporting_evidence": {
+        "quality_inspection_events": 920,
+        "rework_flagged_events": 0,
+        "rejected_qty_events": 180
+      },
+      "evidence_coverage": {
+        "quality_inspection_events": {
+          "expected_count": 1194,
+          "observed_count": 920,
+          "coverage_pct": 77.1,
+          "flag": "OK"
+        },
+        "rework_flagged_events": {
+          "expected_count": 0,
+          "observed_count": 0,
+          "coverage_pct": null,
+          "flag": "NOT_APPLICABLE"
+        },
+        "rejected_qty_events": {
+          "expected_count": 231,
+          "observed_count": 180,
+          "coverage_pct": 77.9,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Category membership is determined by activity-name substring match (Q.C./Inspection/MRB) and a boolean Rework/Qty Rejected field, not a validated quality taxonomy.",
+        "This question is the one Gate 2 section 4 (missing_quality_events scenario) specifically showed can silently vanish from a fitness-score-only or ranking-only report; it is included here specifically to test whether the withholding behavior fires."
+      ]
+    },
+    "abnormal_step": {
+      "question": "Is 'Final Inspection Q.C.' showing abnormal performance (duration)?",
+      "finding": "'Final Inspection Q.C.' does not show abnormal performance in this dataset (mean duration 110.6 min vs. baseline 114.8 min).",
+      "supporting_evidence": {
+        "variant_mean_duration_min": 110.6,
+        "baseline_mean_duration_min": 114.8,
+        "ratio_vs_baseline": 0.96,
+        "variant_event_count": 425,
+        "baseline_event_count": 550
+      },
+      "evidence_coverage": {
+        "activity:Final Inspection Q.C.": {
+          "expected_count": 550,
+          "observed_count": 425,
+          "coverage_pct": 77.3,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Fixed to a single, hand-picked target activity ('Final Inspection Q.C.') for this experiment; a real implementation would need to run this check per-activity, not on one preselected step.",
+        "The 20-event minimum-sample-size threshold and the 1.5x abnormality threshold are illustrative choices for this experiment, not derived from any statistical power analysis or domain evidence."
+      ]
+    }
+  },
+  "inconsistent_records_10pct": {
+    "bottleneck": {
+      "question": "What is the bottleneck (activity and resource)?",
+      "finding": "Candidate bottleneck activity: 'Turning & Milling - Machine 5'. Candidate bottleneck resource: 'Quality Check 1'.",
+      "supporting_evidence": {
+        "top5_bottleneck_activities_by_total_time": [
+          "Turning & Milling - Machine 5",
+          "Turning & Milling - Machine 4",
+          "Turning & Milling - Machine 6",
+          "Final Inspection Q.C.",
+          "Round Grinding - Machine 2"
+        ],
+        "top5_bottleneck_resources_by_total_time": [
+          "Quality Check 1",
+          "Machine 5 - Turning & Milling",
+          "Machine 4 - Turning & Milling",
+          "Machine 6 - Turning & Milling",
+          "Machine 2 - Round Grinding"
+        ],
+        "n_events": 4997,
+        "n_cases": 225
+      },
+      "evidence_coverage": {
+        "activity:Turning & Milling - Machine 5": {
+          "expected_count": 259,
+          "observed_count": 290,
+          "coverage_pct": 112.0,
+          "flag": "OK"
+        },
+        "resource:Quality Check 1": {
+          "expected_count": 1193,
+          "observed_count": 1312,
+          "coverage_pct": 110.0,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 149
+      },
+      "limitations": [
+        "Bottleneck is proxied by total recorded activity duration, not by queueing/waiting time or true resource utilization rate (out of scope per Gate 2 section 7).",
+        "Evidence coverage here is computed only for the specific activity/resource that happens to rank #1 in this scenario, not for every activity/resource in the process."
+      ]
+    },
+    "quality_rework": {
+      "question": "Is quality/rework a significant issue in this process?",
+      "finding": "Quality/rework signal observed: 1312 quality-inspection events, 0 rework-flagged events, 258 events with rejected quantity > 0.",
+      "supporting_evidence": {
+        "quality_inspection_events": 1312,
+        "rework_flagged_events": 0,
+        "rejected_qty_events": 258
+      },
+      "evidence_coverage": {
+        "quality_inspection_events": {
+          "expected_count": 1194,
+          "observed_count": 1312,
+          "coverage_pct": 109.9,
+          "flag": "OK"
+        },
+        "rework_flagged_events": {
+          "expected_count": 0,
+          "observed_count": 0,
+          "coverage_pct": null,
+          "flag": "NOT_APPLICABLE"
+        },
+        "rejected_qty_events": {
+          "expected_count": 231,
+          "observed_count": 258,
+          "coverage_pct": 111.7,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 149
+      },
+      "limitations": [
+        "Category membership is determined by activity-name substring match (Q.C./Inspection/MRB) and a boolean Rework/Qty Rejected field, not a validated quality taxonomy.",
+        "This question is the one Gate 2 section 4 (missing_quality_events scenario) specifically showed can silently vanish from a fitness-score-only or ranking-only report; it is included here specifically to test whether the withholding behavior fires."
+      ]
+    },
+    "abnormal_step": {
+      "question": "Is 'Final Inspection Q.C.' showing abnormal performance (duration)?",
+      "finding": "'Final Inspection Q.C.' does not show abnormal performance in this dataset (mean duration 117.2 min vs. baseline 114.8 min).",
+      "supporting_evidence": {
+        "variant_mean_duration_min": 117.2,
+        "baseline_mean_duration_min": 114.8,
+        "ratio_vs_baseline": 1.02,
+        "variant_event_count": 605,
+        "baseline_event_count": 550
+      },
+      "evidence_coverage": {
+        "activity:Final Inspection Q.C.": {
+          "expected_count": 550,
+          "observed_count": 605,
+          "coverage_pct": 110.0,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 149
+      },
+      "limitations": [
+        "Fixed to a single, hand-picked target activity ('Final Inspection Q.C.') for this experiment; a real implementation would need to run this check per-activity, not on one preselected step.",
+        "The 20-event minimum-sample-size threshold and the 1.5x abnormality threshold are illustrative choices for this experiment, not derived from any statistical power analysis or domain evidence."
+      ]
+    }
+  },
+  "missing_quality_events": {
+    "bottleneck": {
+      "question": "What is the bottleneck (activity and resource)?",
+      "finding": "Candidate bottleneck activity: 'Turning & Milling - Machine 4'. Candidate bottleneck resource: 'Machine 4 - Turning & Milling'.",
+      "supporting_evidence": {
+        "top5_bottleneck_activities_by_total_time": [
+          "Turning & Milling - Machine 4",
+          "Turning & Milling - Machine 5",
+          "Turning & Milling - Machine 6",
+          "Round Grinding - Machine 3",
+          "Round Grinding - Machine 2"
+        ],
+        "top5_bottleneck_resources_by_total_time": [
+          "Machine 4 - Turning & Milling",
+          "Machine 5 - Turning & Milling",
+          "Machine 6 - Turning & Milling",
+          "Machine 2 - Round Grinding",
+          "Machine 3 - Round Grinding"
+        ],
+        "n_events": 3349,
+        "n_cases": 220
+      },
+      "evidence_coverage": {
+        "activity:Turning & Milling - Machine 4": {
+          "expected_count": 262,
+          "observed_count": 262,
+          "coverage_pct": 100.0,
+          "flag": "OK"
+        },
+        "resource:Machine 4 - Turning & Milling": {
+          "expected_count": 271,
+          "observed_count": 271,
+          "coverage_pct": 100.0,
+          "flag": "OK"
+        }
+      },
+      "missing_evidence": [],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Bottleneck is proxied by total recorded activity duration, not by queueing/waiting time or true resource utilization rate (out of scope per Gate 2 section 7).",
+        "Evidence coverage here is computed only for the specific activity/resource that happens to rank #1 in this scenario, not for every activity/resource in the process."
+      ]
+    },
+    "quality_rework": {
+      "question": "Is quality/rework a significant issue in this process?",
+      "finding": "Cannot determine whether quality/rework is a significant issue in this process: one or more quality-related evidence categories have zero observed events, even though other process-mining outputs (discovery, conformance) still run and produce a result.",
+      "supporting_evidence": {
+        "quality_inspection_events": 0,
+        "rework_flagged_events": 0,
+        "rejected_qty_events": 18
+      },
+      "evidence_coverage": {
+        "quality_inspection_events": {
+          "expected_count": 1194,
+          "observed_count": 0,
+          "coverage_pct": 0.0,
+          "flag": "MISSING"
+        },
+        "rework_flagged_events": {
+          "expected_count": 0,
+          "observed_count": 0,
+          "coverage_pct": null,
+          "flag": "NOT_APPLICABLE"
+        },
+        "rejected_qty_events": {
+          "expected_count": 231,
+          "observed_count": 18,
+          "coverage_pct": 7.8,
+          "flag": "SEVERELY_DEGRADED"
+        }
+      },
+      "missing_evidence": [
+        "quality_inspection_events: MISSING (0 of 1194 baseline events observed, 0.0% coverage)",
+        "rejected_qty_events: SEVERELY_DEGRADED (18 of 231 baseline events observed, 7.8% coverage)"
+      ],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Category membership is determined by activity-name substring match (Q.C./Inspection/MRB) and a boolean Rework/Qty Rejected field, not a validated quality taxonomy.",
+        "This question is the one Gate 2 section 4 (missing_quality_events scenario) specifically showed can silently vanish from a fitness-score-only or ranking-only report; it is included here specifically to test whether the withholding behavior fires."
+      ]
+    },
+    "abnormal_step": {
+      "question": "Is 'Final Inspection Q.C.' showing abnormal performance (duration)?",
+      "finding": "Cannot determine whether 'Final Inspection Q.C.' shows abnormal performance: insufficient surviving evidence for this specific activity in this dataset.",
+      "supporting_evidence": {
+        "variant_mean_duration_min": null,
+        "baseline_mean_duration_min": 114.8,
+        "ratio_vs_baseline": null,
+        "variant_event_count": 0,
+        "baseline_event_count": 550
+      },
+      "evidence_coverage": {
+        "activity:Final Inspection Q.C.": {
+          "expected_count": 550,
+          "observed_count": 0,
+          "coverage_pct": 0.0,
+          "flag": "MISSING"
+        }
+      },
+      "missing_evidence": [
+        "Only 0 events observed for 'Final Inspection Q.C.' (baseline: 550); below the 20-event minimum this check requires to trust a mean-duration comparison.",
+        "Coverage of 'Final Inspection Q.C.' events is MISSING in this dataset."
+      ],
+      "logical_inconsistencies": {
+        "negative_duration_events": 0
+      },
+      "limitations": [
+        "Fixed to a single, hand-picked target activity ('Final Inspection Q.C.') for this experiment; a real implementation would need to run this check per-activity, not on one preselected step.",
+        "The 20-event minimum-sample-size threshold and the 1.5x abnormality threshold are illustrative choices for this experiment, not derived from any statistical power analysis or domain evidence."
+      ]
+    }
+  }
+}

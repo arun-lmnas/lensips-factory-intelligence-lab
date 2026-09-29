@@ -1,0 +1,38 @@
+{
+  "reviewer_note": "Independent classification performed by the agent, reading ONLY the blinded fields (question, supporting_evidence, evidence_coverage, missing_evidence, logical_inconsistencies, limitations) with confidence_status programmatically stripped beforehand. Not an external human reviewer -- this session has no separate human in the loop. Flagged as a limitation in the Gate 3 follow-up report.",
+  "reviews": [
+    {"scenario": "baseline", "question": "bottleneck", "human_label": "HIGH", "algo_label": "HIGH", "agree": true, "rationale": "100% coverage on both activity and resource, zero logical inconsistencies."},
+    {"scenario": "baseline", "question": "quality_rework", "human_label": "HIGH", "algo_label": "HIGH", "agree": true, "rationale": "100% coverage, zero inconsistencies."},
+    {"scenario": "baseline", "question": "abnormal_step", "human_label": "HIGH", "algo_label": "HIGH", "agree": true, "rationale": "100% coverage, ratio exactly 1.0 (identical to baseline by construction)."},
+
+    {"scenario": "milestone_only", "question": "bottleneck", "human_label": "LOW", "algo_label": "LOW", "agree": true, "rationale": "Both activity (11.8%) and resource (11.5%) coverage are severely thin; nonzero so not WITHHELD, but too little to trust the ranking."},
+    {"scenario": "milestone_only", "question": "quality_rework", "human_label": "LOW", "algo_label": "LOW", "agree": true, "rationale": "11.5%/14.3% coverage -- present but far too sparse to trust a quantitative quality signal."},
+    {"scenario": "milestone_only", "question": "abnormal_step", "human_label": "LOW", "algo_label": "LOW", "agree": true, "rationale": "16.0% coverage (88 of 550 events); duration comparison not trustworthy at this sample size."},
+
+    {"scenario": "missing_timestamps_30pct", "question": "bottleneck", "human_label": "HIGH", "algo_label": "HIGH", "agree": true, "rationale": "~70-73% coverage on both, no inconsistencies -- most of the evidence base survived."},
+    {"scenario": "missing_timestamps_30pct", "question": "quality_rework", "human_label": "HIGH", "algo_label": "HIGH", "agree": true, "rationale": "~70-71% coverage across all three quality categories, consistent with each other, no inconsistencies."},
+    {"scenario": "missing_timestamps_30pct", "question": "abnormal_step", "human_label": "HIGH", "algo_label": "MEDIUM", "agree": false, "rationale": "68.5% coverage (377/550) is one row below the two adjacent findings at 70.0-71.0% that were both graded HIGH; ratio_vs_baseline is 1.0 (identical mean duration), the strongest possible signal this specific claim is unaffected by the missing 31.5%. A human reading the evidence side-by-side with the other findings in this scenario would not treat 68.5% as meaningfully weaker than 70.1%, and the near-identical mean duration is itself reassuring evidence the disagreement doesn't reflect. This is a threshold cliff-edge artifact, not a real evidence difference."},
+
+    {"scenario": "missing_resource_40pct", "question": "bottleneck", "human_label": "MEDIUM", "algo_label": "MEDIUM", "agree": true, "rationale": "Activity coverage 100% (fully supports naming the bottleneck activity) but resource coverage only 59.9% (weakly supports naming the bottleneck resource); since the finding asserts both an activity AND a resource, the weaker of the two reasonably caps the combined confidence. Noted design question below: a compound finding might deserve two confidence labels, not one."},
+    {"scenario": "missing_resource_40pct", "question": "quality_rework", "human_label": "HIGH", "algo_label": "HIGH", "agree": true, "rationale": "100% coverage on all applicable categories."},
+    {"scenario": "missing_resource_40pct", "question": "abnormal_step", "human_label": "HIGH", "algo_label": "HIGH", "agree": true, "rationale": "100% coverage, ratio 1.0."},
+
+    {"scenario": "incomplete_relationships_30pct", "question": "bottleneck", "human_label": "HIGH", "algo_label": "HIGH", "agree": true, "rationale": "72-77% coverage on both, no inconsistencies."},
+    {"scenario": "incomplete_relationships_30pct", "question": "quality_rework", "human_label": "HIGH", "algo_label": "HIGH", "agree": true, "rationale": "77-78% coverage across categories, consistent, no inconsistencies."},
+    {"scenario": "incomplete_relationships_30pct", "question": "abnormal_step", "human_label": "HIGH", "algo_label": "HIGH", "agree": true, "rationale": "77.3% coverage, ratio 0.96 (close to baseline)."},
+
+    {"scenario": "inconsistent_records_10pct", "question": "bottleneck", "human_label": "LOW", "algo_label": "LOW", "agree": true, "rationale": "Coverage reads as 110-112%, i.e. over 100% -- itself a red flag for duplicated/corrupted data rather than reassurance -- combined with 149 detected logically-impossible (negative-duration) events in the dataset. Agree the finding should be downgraded, though for a slightly different reason than 'any nonzero inconsistency count': here the over-coverage number is itself suspicious, which a coverage-percentage-only view would have missed entirely."},
+    {"scenario": "inconsistent_records_10pct", "question": "quality_rework", "human_label": "LOW", "algo_label": "LOW", "agree": true, "rationale": "Same over-coverage + inconsistency pattern as the bottleneck finding in this scenario."},
+    {"scenario": "inconsistent_records_10pct", "question": "abnormal_step", "human_label": "LOW", "algo_label": "LOW", "agree": true, "rationale": "Coverage 110% and ratio 1.02 look reassuring in isolation, but the shown fields do not indicate whether any of the 149 dataset-wide corrupted records fall within this specific activity's 605 events -- that ambiguity alone is enough reason for caution, independent of whether the current mechanism intended to flag it for that reason. Design question raised below: the inconsistency count is dataset-global, not scoped to the evidence category a specific finding depends on."},
+
+    {"scenario": "missing_quality_events", "question": "bottleneck", "human_label": "HIGH", "algo_label": "HIGH", "agree": true, "rationale": "100% coverage on the (different) candidate activity/resource that this scenario surfaces, no inconsistencies."},
+    {"scenario": "missing_quality_events", "question": "quality_rework", "human_label": "WITHHELD", "algo_label": "WITHHELD", "agree": true, "rationale": "0% coverage (0 of 1194) on the primary quality-inspection category -- no basis to assert or deny a quality issue."},
+    {"scenario": "missing_quality_events", "question": "abnormal_step", "human_label": "WITHHELD", "algo_label": "WITHHELD", "agree": true, "rationale": "0 of 550 events observed for the target activity -- literally nothing to compute a mean duration from."}
+  ],
+  "summary": {
+    "total_findings": 21,
+    "agreements": 20,
+    "disagreements": 1,
+    "agreement_rate_pct": 95.2
+  }
+}

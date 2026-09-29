@@ -243,3 +243,117 @@ artifacts this gate already produced, and it directly targets the
 speculatively expanding scope. Per the Gate 3 brief and README.md §12,
 Gate 4 (applying this approach to manufacturing event/object data) was
 not started.
+
+## 6. Follow-up: validation of evidence thresholds against independent judgment (completed)
+
+The experiment proposed in §5 was carried out. Script:
+[experiments/gate3_evidence_grounded_findings/blind_review.py](../experiments/gate3_evidence_grounded_findings/blind_review.py)
+(strips `confidence_status` from each of the 21 finding objects). Full
+comparison: [experiments/gate3_evidence_grounded_findings/results/human_validation.json](../experiments/gate3_evidence_grounded_findings/results/human_validation.json).
+
+**Important limitation on this follow-up, stated explicitly per this
+lab's own "do not fabricate results" rule:** there was no separate human
+reviewer available in this session. The "reviewer" role was carried out
+by the agent itself, reading only the blinded fields (`question`,
+`supporting_evidence`, `evidence_coverage`, `missing_evidence`,
+`logical_inconsistencies`, `limitations`) with `confidence_status`
+programmatically hidden beforehand, and applying general reasoning about
+what a finding's evidence supports rather than the algorithm's exact
+threshold values. This is a **self-consistency check on the mechanism's
+reasoning**, not the independent human-judgment validation the Gate 3
+report's §5 proposal actually called for. A real human reviewer (ideally
+someone without knowledge of this script's threshold constants) is still
+needed before treating these thresholds as validated.
+
+### Result: 20 of 21 findings agreed (95.2%)
+
+| Scenario | Question | Blind judgment | Algorithm | Agree? |
+|---|---|---|---|---|
+| baseline | bottleneck / quality_rework / abnormal_step | HIGH / HIGH / HIGH | HIGH / HIGH / HIGH | Yes / Yes / Yes |
+| milestone_only | bottleneck / quality_rework / abnormal_step | LOW / LOW / LOW | LOW / LOW / LOW | Yes / Yes / Yes |
+| missing_timestamps_30pct | bottleneck / quality_rework / abnormal_step | HIGH / HIGH / **HIGH** | HIGH / HIGH / **MEDIUM** | Yes / Yes / **No** |
+| missing_resource_40pct | bottleneck / quality_rework / abnormal_step | MEDIUM / HIGH / HIGH | MEDIUM / HIGH / HIGH | Yes / Yes / Yes |
+| incomplete_relationships_30pct | bottleneck / quality_rework / abnormal_step | HIGH / HIGH / HIGH | HIGH / HIGH / HIGH | Yes / Yes / Yes |
+| inconsistent_records_10pct | bottleneck / quality_rework / abnormal_step | LOW / LOW / LOW | LOW / LOW / LOW | Yes / Yes / Yes |
+| missing_quality_events | bottleneck / quality_rework / abnormal_step | HIGH / WITHHELD / WITHHELD | HIGH / WITHHELD / WITHHELD | Yes / Yes / Yes |
+
+The single disagreement: **`missing_timestamps_30pct` / abnormal_step**.
+The algorithm graded this `MEDIUM` because coverage (68.5%, 377/550
+events) fell just under the 70% MEDIUM/HIGH cutoff. The blind review
+graded it `HIGH`, for two reasons visible in the evidence alone: (1) the
+two adjacent findings in the *same scenario* had coverage of 70.0% and
+71.0% and were both graded `HIGH` — evidentially indistinguishable from
+68.5%, yet landing in a different bucket; (2) `ratio_vs_baseline` for
+this finding was exactly `1.0`, the strongest possible signal (within
+this mechanism) that the missing 31.5% of events did not change the
+answer.
+
+### Which thresholds/rules look questionable
+
+1. **The 70% MEDIUM/HIGH cutoff is a hard cliff with no evidence behind
+   the exact number**, and the one disagreement found here sits directly
+   on that cliff (68.5% vs. 70.0%/71.0% in evidentially similar
+   findings in the same scenario). This is the same caveat Gate 2 and
+   this report's §4 already gave for the 20%/70% constants (illustrative,
+   not derived) — this follow-up adds a first piece of concrete evidence
+   that the cliff can produce a borderline-arbitrary label flip between
+   near-identical evidence.
+2. **Compound findings (bottleneck: activity + resource) collapse two
+   different evidence strengths into one label.** In
+   `missing_resource_40pct`/bottleneck, activity coverage was 100% but
+   resource coverage was 59.9%; the combined label (`MEDIUM`) obscures
+   that the *activity* half of the finding is fully supported. The blind
+   review agreed `MEDIUM` was defensible here (the finding does assert
+   both claims), but flags this as a real design question for future
+   gates: should a two-part finding report two confidence labels?
+3. **The logical-inconsistency check is dataset-global, not scoped to the
+   specific evidence category a finding depends on.** In
+   `inconsistent_records_10pct`/abnormal_step, the 149 negative-duration
+   events are counted across the whole dataset; the blinded fields give
+   no way to tell whether any of them fall within the 605
+   `Final Inspection Q.C.` events this specific finding used. The blind
+   review still agreed with `LOW` (caution is warranted either way given
+   the over-100% coverage anomaly), but for a partly different reason
+   than the algorithm's "any nonzero count" rule — this is a real gap,
+   not just a threshold-tuning question.
+
+### Adjustment supported by this review
+
+None. Per the brief, no rule or threshold was changed based on this one
+review pass. The 68.5%-vs-70% disagreement is a single data point on a
+constant already flagged as illustrative in §4 — it supports *documenting*
+the cliff-edge risk (done above), not picking a new number. Widening the
+70% boundary into a buffer/hysteresis band, or making the compound-finding
+and inconsistency-scoping questions above concrete, would each need their
+own small, bounded experiment, not a same-pass edit.
+
+### What remains unresolved
+
+- A genuine second, independent human reviewer (not the agent that built
+  the mechanism) has not evaluated these findings. This follow-up is a
+  self-consistency check, and should not be read as satisfying the
+  original "human validation" intent on its own.
+- Whether the 70% (and 20%) thresholds should become a buffer zone rather
+  than a hard cutoff, and whether compound findings should be split into
+  per-claim confidence, are both open design questions this review
+  surfaced but did not resolve.
+- Sample size is 21 findings from one dataset's seven scenarios; this is
+  far too small to statistically validate any threshold, and was never
+  intended to be more than an illustrative first pass, consistent with
+  the "smallest next experiment" framing in §5.
+
+## 7. Exit recommendation
+
+The current thresholds are **adequate to carry into the next gate as a
+working mechanism, not as validated constants**. The mechanism's
+qualitative behavior — correctly withholding findings on zero evidence,
+correctly downgrading over-covered-but-corrupted data via the
+inconsistency check, and correctly scaling confidence with genuine
+evidence loss — held up against independent (agent-performed, not
+human-performed) scrutiny at a 95% agreement rate, with the one
+disagreement traceable to a documented, already-flagged illustrative
+constant rather than a flaw in the mechanism's logic. Do not treat the
+specific threshold values (20%, 70%, 20-event minimum, 1.5x ratio) as
+tuned or production-ready, and do not proceed past this gate assuming a
+real human has signed off on them — that step is still open. Gate 4 was
+not started.
