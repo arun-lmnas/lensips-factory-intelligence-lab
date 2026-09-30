@@ -34,8 +34,22 @@ hypothesis. Read it before doing anything else here.
   bottleneck finding on the same dataset still runs and reports high
   confidence. Reproducible script:
   [experiments/gate3_evidence_grounded_findings/run_experiment.py](experiments/gate3_evidence_grounded_findings/run_experiment.py).
+- **Gate 4** (multi-object manufacturing intelligence reconnaissance) is
+  done — see
+  [reports/GATE4_MULTI_OBJECT_RECONNAISSANCE.md](reports/GATE4_MULTI_OBJECT_RECONNAISSANCE.md).
+  Compared a case-centric baseline against a multi-object (order/product/
+  operation/machine/worker/quality-event) view on the Gate 2/3 dataset. Key
+  finding: cross-case aggregation (shared-bottleneck-vs-product-cost
+  machines, product/machine quality concentration) is a real, low-complexity
+  gain over case-centric analysis; a naive timestamp-overlap proxy for
+  delay-propagation-via-shared-resource did not produce a usable signal
+  (flagged 99.7% of gaps, a discrimination failure) and is reported as NOT
+  DEMONSTRATED; material/supplier questions are also NOT DEMONSTRATED since
+  the dataset has no such fields. No OCEL framework, digital twin, or
+  transformer ontology was built. Reproducible script:
+  [experiments/gate4_multi_object_reconnaissance/run_experiment.py](experiments/gate4_multi_object_reconnaissance/run_experiment.py).
 
-Do not start Gate 4 or later without explicit instruction — see README.md
+Do not start Gate 5 or later without explicit instruction — see README.md
 section 12 for the gate sequence.
 
 ## Ground rules for every task in this repo

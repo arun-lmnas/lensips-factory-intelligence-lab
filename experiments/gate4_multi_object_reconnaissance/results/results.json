@@ -1,0 +1,610 @@
+{
+  "dataset": {
+    "path": "datasets/production_analysis/Production_Data.csv",
+    "n_rows": 4543,
+    "n_cases": 225,
+    "n_resources": 31,
+    "n_products": 43,
+    "n_workers": 49,
+    "object_types_present": [
+      "Order (Case ID)",
+      "Product (Part Desc.)",
+      "Operation (Activity)",
+      "Machine/Resource",
+      "Worker",
+      "Quality event (Q.C./Rework/Reject/MRB)"
+    ],
+    "object_types_absent": [
+      "Material/BOM",
+      "Supplier"
+    ]
+  },
+  "part1_case_centric_baseline": {
+    "n_cases": 225,
+    "n_events": 4543,
+    "order_duration_hours": {
+      "mean": 494.9,
+      "median": 333.6,
+      "max": 2098.9,
+      "top5_longest_cases": {
+        "Case 199": 2098.9,
+        "Case 185": 2096.7,
+        "Case 266": 2058.2,
+        "Case 177": 2056.9,
+        "Case 225": 2034.3
+      }
+    },
+    "top10_activities_by_total_hours": {
+      "Turning & Milling - Machine 4": 1457.2,
+      "Turning & Milling - Machine 5": 1394.9,
+      "Turning & Milling - Machine 6": 1328.4,
+      "Final Inspection Q.C.": 1052.4,
+      "Round Grinding - Machine 3": 1046.5,
+      "Round Grinding - Machine 2": 1038.9,
+      "Turning & Milling - Machine 10": 839.6,
+      "Turning & Milling Q.C.": 797.1,
+      "Turning & Milling - Machine 9": 761.4,
+      "Turning & Milling - Machine 8": 668.0
+    },
+    "top10_resources_by_total_hours": {
+      "Quality Check 1": 2077.6,
+      "Machine 4 - Turning & Milling": 1511.0,
+      "Machine 5 - Turning & Milling": 1412.2,
+      "Machine 6 - Turning & Milling": 1328.4,
+      "Machine 2 - Round Grinding": 1073.4,
+      "Machine 3 - Round Grinding": 1049.1,
+      "Machine 10 - Grinding": 1005.1,
+      "Machine 9 - Turning & Milling": 926.1,
+      "Machine 8 - Turning & Milling": 798.6,
+      "Machine 1 - Lapping": 656.8
+    },
+    "n_within_case_gaps": 3230,
+    "top10_longest_within_case_gaps": [
+      {
+        "case_id": "Case 182",
+        "gap_hours": 1372.9,
+        "after_activity": "Turning & Milling Q.C.",
+        "after_resource": "Quality Check 1",
+        "before_activity": "Grinding Rework - Machine 12",
+        "before_resource": "Machine 12 - Grinding",
+        "gap_start": "2012-01-09T11:11:00",
+        "gap_end": "2012-03-06T16:05:00"
+      },
+      {
+        "case_id": "Case 185",
+        "gap_hours": 1317.95,
+        "after_activity": "Final Inspection Q.C.",
+        "after_resource": "Quality Check 1",
+        "before_activity": "Final Inspection Q.C.",
+        "before_resource": "Quality Check 1",
+        "gap_start": "2012-01-30T12:18:00",
+        "gap_end": "2012-03-25T10:15:00"
+      },
+      {
+        "case_id": "Case 67",
+        "gap_hours": 1138.35,
+        "after_activity": "Laser Marking - Machine 7",
+        "after_resource": "Machine 7- Laser Marking",
+        "before_activity": "Lapping - Machine 1",
+        "before_resource": "Machine 1 - Lapping",
+        "gap_start": "2012-02-08T13:39:00",
+        "gap_end": "2012-03-27T00:00:00"
+      },
+      {
+        "case_id": "Case 177",
+        "gap_hours": 1093.75,
+        "after_activity": "Final Inspection Q.C.",
+        "after_resource": "Quality Check 1",
+        "before_activity": "Lapping - Machine 1",
+        "before_resource": "Machine 1 - Lapping",
+        "gap_start": "2012-02-13T10:15:00",
+        "gap_end": "2012-03-30T00:00:00"
+      },
+      {
+        "case_id": "Case 148",
+        "gap_hours": 945.0,
+        "after_activity": "Fix EDM",
+        "after_resource": "Machine 17 - Sinking",
+        "before_activity": "Final Inspection Q.C.",
+        "before_resource": "Quality Check 1",
+        "gap_start": "2012-01-17T15:00:00",
+        "gap_end": "2012-02-26T00:00:00"
+      },
+      {
+        "case_id": "Case 198",
+        "gap_hours": 923.8,
+        "after_activity": "Turning & Milling Q.C.",
+        "after_resource": "Quality Check 1",
+        "before_activity": "Lapping - Machine 1",
+        "before_resource": "Machine 1 - Lapping",
+        "gap_start": "2012-01-27T11:12:00",
+        "gap_end": "2012-03-05T23:00:00"
+      },
+      {
+        "case_id": "Case 199",
+        "gap_hours": 903.25,
+        "after_activity": "Packing",
+        "after_resource": "Packing",
+        "before_activity": "Lapping - Machine 1",
+        "before_resource": "Machine 1 - Lapping",
+        "gap_start": "2012-01-20T01:00:00",
+        "gap_end": "2012-02-26T16:15:00"
+      },
+      {
+        "case_id": "Case 179",
+        "gap_hours": 873.75,
+        "after_activity": "Packing",
+        "after_resource": "Packing",
+        "before_activity": "Grinding Rework - Machine 12",
+        "before_resource": "Machine 12 - Grinding",
+        "gap_start": "2012-01-15T01:00:00",
+        "gap_end": "2012-02-20T10:45:00"
+      },
+      {
+        "case_id": "Case 163",
+        "gap_hours": 872.0,
+        "after_activity": "Final Inspection Q.C.",
+        "after_resource": "Quality Check 1",
+        "before_activity": "Packing",
+        "before_resource": "Packing",
+        "gap_start": "2012-01-24T16:00:00",
+        "gap_end": "2012-03-01T00:00:00"
+      },
+      {
+        "case_id": "Case 251",
+        "gap_hours": 838.95,
+        "after_activity": "Turning & Milling Q.C.",
+        "after_resource": "Quality Check 1",
+        "before_activity": "Lapping - Machine 1",
+        "before_resource": "Machine 1 - Lapping",
+        "gap_start": "2012-01-10T16:10:00",
+        "gap_end": "2012-02-14T15:07:00"
+      }
+    ],
+    "limitations": [
+      "Each case is analysed in isolation: this view has no mechanism to detect whether a within-case waiting gap is caused by a resource being busy on a different order, a genuine idle period, or something else.",
+      "Resource/activity totals are summed per activity label across all cases, but the case-centric view gives no way to see whether high resource-time is concentrated on a few contended machines or spread evenly.",
+      "No visibility into whether a quality issue recurs for a specific product-machine or worker-machine combination across different orders, since each case is a closed unit."
+    ]
+  },
+  "part2_multi_object": {
+    "machine_contention_cross_order": {
+      "Quality Check 1": {
+        "n_distinct_cases_using_resource": 214,
+        "n_cross_order_overlapping_pairs": 1646,
+        "total_cross_order_overlap_hours": 2341.2
+      },
+      "Packing": {
+        "n_distinct_cases_using_resource": 175,
+        "n_cross_order_overlapping_pairs": 526,
+        "total_cross_order_overlap_hours": 657.0
+      },
+      "Machine 1 - Lapping": {
+        "n_distinct_cases_using_resource": 132,
+        "n_cross_order_overlapping_pairs": 93,
+        "total_cross_order_overlap_hours": 120.9
+      },
+      "Machine 5 - Turning & Milling": {
+        "n_distinct_cases_using_resource": 35,
+        "n_cross_order_overlapping_pairs": 17,
+        "total_cross_order_overlap_hours": 61.1
+      },
+      "Machine 9 - Turning & Milling": {
+        "n_distinct_cases_using_resource": 26,
+        "n_cross_order_overlapping_pairs": 9,
+        "total_cross_order_overlap_hours": 50.6
+      },
+      "Machine 6 - Turning & Milling": {
+        "n_distinct_cases_using_resource": 39,
+        "n_cross_order_overlapping_pairs": 17,
+        "total_cross_order_overlap_hours": 48.5
+      },
+      "Machine 4 - Turning & Milling": {
+        "n_distinct_cases_using_resource": 35,
+        "n_cross_order_overlapping_pairs": 16,
+        "total_cross_order_overlap_hours": 42.9
+      },
+      "Machine 2 - Round Grinding": {
+        "n_distinct_cases_using_resource": 47,
+        "n_cross_order_overlapping_pairs": 12,
+        "total_cross_order_overlap_hours": 29.8
+      },
+      "Machine 10 - Grinding": {
+        "n_distinct_cases_using_resource": 21,
+        "n_cross_order_overlapping_pairs": 7,
+        "total_cross_order_overlap_hours": 27.2
+      },
+      "Machine 3 - Round Grinding": {
+        "n_distinct_cases_using_resource": 44,
+        "n_cross_order_overlapping_pairs": 13,
+        "total_cross_order_overlap_hours": 17.0
+      },
+      "Machine 7- Laser Marking": {
+        "n_distinct_cases_using_resource": 167,
+        "n_cross_order_overlapping_pairs": 34,
+        "total_cross_order_overlap_hours": 16.5
+      },
+      "Machine 11 - Grinding": {
+        "n_distinct_cases_using_resource": 65,
+        "n_cross_order_overlapping_pairs": 6,
+        "total_cross_order_overlap_hours": 7.2
+      },
+      "Machine 27 - Grinding": {
+        "n_distinct_cases_using_resource": 43,
+        "n_cross_order_overlapping_pairs": 4,
+        "total_cross_order_overlap_hours": 5.2
+      },
+      "Machine 15 - Turning": {
+        "n_distinct_cases_using_resource": 8,
+        "n_cross_order_overlapping_pairs": 1,
+        "total_cross_order_overlap_hours": 4.7
+      },
+      "Machine 8 - Turning & Milling": {
+        "n_distinct_cases_using_resource": 44,
+        "n_cross_order_overlapping_pairs": 5,
+        "total_cross_order_overlap_hours": 4.0
+      },
+      "Machine 12 - Grinding": {
+        "n_distinct_cases_using_resource": 33,
+        "n_cross_order_overlapping_pairs": 1,
+        "total_cross_order_overlap_hours": 0.2
+      },
+      "Machine 14 - Milling": {
+        "n_distinct_cases_using_resource": 2,
+        "n_cross_order_overlapping_pairs": 0,
+        "total_cross_order_overlap_hours": 0.0
+      },
+      "Machine 16 - Milling": {
+        "n_distinct_cases_using_resource": 4,
+        "n_cross_order_overlapping_pairs": 0,
+        "total_cross_order_overlap_hours": 0.0
+      },
+      "Machine 17 - Sinking": {
+        "n_distinct_cases_using_resource": 2,
+        "n_cross_order_overlapping_pairs": 0,
+        "total_cross_order_overlap_hours": 0.0
+      },
+      "Machine 18 - Wire Cutting": {
+        "n_distinct_cases_using_resource": 3,
+        "n_cross_order_overlapping_pairs": 0,
+        "total_cross_order_overlap_hours": 0.0
+      },
+      "Machine 21 - Turning": {
+        "n_distinct_cases_using_resource": 4,
+        "n_cross_order_overlapping_pairs": 0,
+        "total_cross_order_overlap_hours": 0.0
+      },
+      "Machine 23 - Turning": {
+        "n_distinct_cases_using_resource": 2,
+        "n_cross_order_overlapping_pairs": 0,
+        "total_cross_order_overlap_hours": 0.0
+      },
+      "Manual Deburring": {
+        "n_distinct_cases_using_resource": 6,
+        "n_cross_order_overlapping_pairs": 0,
+        "total_cross_order_overlap_hours": 0.0
+      },
+      "Manual Milling - Machine 28": {
+        "n_distinct_cases_using_resource": 2,
+        "n_cross_order_overlapping_pairs": 0,
+        "total_cross_order_overlap_hours": 0.0
+      },
+      "Oven": {
+        "n_distinct_cases_using_resource": 3,
+        "n_cross_order_overlapping_pairs": 0,
+        "total_cross_order_overlap_hours": 0.0
+      },
+      "Wire Cut - Machine 13": {
+        "n_distinct_cases_using_resource": 4,
+        "n_cross_order_overlapping_pairs": 0,
+        "total_cross_order_overlap_hours": 0.0
+      }
+    },
+    "quality_by_product_machine_top15": [
+      {
+        "Part Desc.": "Cable Head",
+        "Resource": "Quality Check 1",
+        "n_orders": 47,
+        "n_events": 339,
+        "qty_rejected": 215,
+        "qty_mrb": 101,
+        "n_rework_events": 2
+      },
+      {
+        "Part Desc.": "Ballnut",
+        "Resource": "Quality Check 1",
+        "n_orders": 57,
+        "n_events": 244,
+        "qty_rejected": 98,
+        "qty_mrb": 0,
+        "n_rework_events": 2
+      },
+      {
+        "Part Desc.": "Punch Holder",
+        "Resource": "Quality Check 1",
+        "n_orders": 3,
+        "n_events": 46,
+        "qty_rejected": 37,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      },
+      {
+        "Part Desc.": "Spur Gear",
+        "Resource": "Quality Check 1",
+        "n_orders": 26,
+        "n_events": 106,
+        "qty_rejected": 25,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      },
+      {
+        "Part Desc.": "Fastener",
+        "Resource": "Quality Check 1",
+        "n_orders": 2,
+        "n_events": 13,
+        "qty_rejected": 18,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      },
+      {
+        "Part Desc.": "Housing",
+        "Resource": "Quality Check 1",
+        "n_orders": 9,
+        "n_events": 33,
+        "qty_rejected": 17,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      },
+      {
+        "Part Desc.": "Electrical Contact",
+        "Resource": "Quality Check 1",
+        "n_orders": 2,
+        "n_events": 11,
+        "qty_rejected": 13,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      },
+      {
+        "Part Desc.": "Hinge",
+        "Resource": "Machine 5 - Turning & Milling",
+        "n_orders": 1,
+        "n_events": 10,
+        "qty_rejected": 13,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      },
+      {
+        "Part Desc.": "Punch Plate",
+        "Resource": "Quality Check 1",
+        "n_orders": 2,
+        "n_events": 13,
+        "qty_rejected": 10,
+        "qty_mrb": 0,
+        "n_rework_events": 2
+      },
+      {
+        "Part Desc.": "Bearing",
+        "Resource": "Machine 10 - Grinding",
+        "n_orders": 1,
+        "n_events": 9,
+        "qty_rejected": 10,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      },
+      {
+        "Part Desc.": "Bearing",
+        "Resource": "Quality Check 1",
+        "n_orders": 9,
+        "n_events": 31,
+        "qty_rejected": 10,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      },
+      {
+        "Part Desc.": "Plug",
+        "Resource": "Quality Check 1",
+        "n_orders": 6,
+        "n_events": 30,
+        "qty_rejected": 10,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      },
+      {
+        "Part Desc.": "Ballnut",
+        "Resource": "Machine 7- Laser Marking",
+        "n_orders": 45,
+        "n_events": 64,
+        "qty_rejected": 9,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      },
+      {
+        "Part Desc.": "Clamp",
+        "Resource": "Quality Check 1",
+        "n_orders": 3,
+        "n_events": 18,
+        "qty_rejected": 8,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      },
+      {
+        "Part Desc.": "Punch Holder",
+        "Resource": "Machine 2 - Round Grinding",
+        "n_orders": 1,
+        "n_events": 1,
+        "qty_rejected": 8,
+        "qty_mrb": 0,
+        "n_rework_events": 0
+      }
+    ],
+    "worker_machine_reject_rate_top10": [
+      {
+        "Worker ID": "ID4163",
+        "Resource": "Quality Check 1",
+        "n_events": 298,
+        "qty_completed": 2869,
+        "qty_rejected": 143,
+        "reject_rate_pct": 4.7
+      },
+      {
+        "Worker ID": "ID4493",
+        "Resource": "Quality Check 1",
+        "n_events": 164,
+        "qty_completed": 4617,
+        "qty_rejected": 83,
+        "reject_rate_pct": 1.8
+      },
+      {
+        "Worker ID": "ID4287",
+        "Resource": "Quality Check 1",
+        "n_events": 300,
+        "qty_completed": 5643,
+        "qty_rejected": 104,
+        "reject_rate_pct": 1.8
+      },
+      {
+        "Worker ID": "ID4618",
+        "Resource": "Quality Check 1",
+        "n_events": 419,
+        "qty_completed": 15362,
+        "qty_rejected": 181,
+        "reject_rate_pct": 1.2
+      },
+      {
+        "Worker ID": "ID0937",
+        "Resource": "Quality Check 1",
+        "n_events": 5,
+        "qty_completed": 290,
+        "qty_rejected": 1,
+        "reject_rate_pct": 0.3
+      },
+      {
+        "Worker ID": "ID0998",
+        "Resource": "Machine 7- Laser Marking",
+        "n_events": 143,
+        "qty_completed": 5436,
+        "qty_rejected": 5,
+        "reject_rate_pct": 0.1
+      },
+      {
+        "Worker ID": "ID4641",
+        "Resource": "Machine 4 - Turning & Milling",
+        "n_events": 7,
+        "qty_completed": 139,
+        "qty_rejected": 0,
+        "reject_rate_pct": 0.0
+      },
+      {
+        "Worker ID": "ID4794",
+        "Resource": "Machine 4 - Turning & Milling",
+        "n_events": 27,
+        "qty_completed": 541,
+        "qty_rejected": 0,
+        "reject_rate_pct": 0.0
+      },
+      {
+        "Worker ID": "ID4794",
+        "Resource": "Machine 10 - Grinding",
+        "n_events": 6,
+        "qty_completed": 80,
+        "qty_rejected": 0,
+        "reject_rate_pct": 0.0
+      },
+      {
+        "Worker ID": "ID4718",
+        "Resource": "Machine 7- Laser Marking",
+        "n_events": 9,
+        "qty_completed": 761,
+        "qty_rejected": 0,
+        "reject_rate_pct": 0.0
+      }
+    ],
+    "shared_resource_delay_attribution": {
+      "n_gaps_total": 3230,
+      "n_gaps_on_contended_resource": 3220,
+      "total_gap_hours_on_contended_resource": 99433.9,
+      "total_gap_hours_all": 99554.7,
+      "caveat": "This is a coincidence check (gap precedes an event on a resource this script separately flags as cross-order-contended), not a proven causal link -- the waiting order and the contending order are not shown to be queued for the SAME resource slot at the SAME time. See Evidence Reliability in the report."
+    },
+    "cross_order_shared_bottleneck_top10": [
+      {
+        "Resource": "Quality Check 1",
+        "total_hours": 2077.6,
+        "n_distinct_products": 41,
+        "n_distinct_orders": 214
+      },
+      {
+        "Resource": "Machine 4 - Turning & Milling",
+        "total_hours": 1511.0,
+        "n_distinct_products": 13,
+        "n_distinct_orders": 35
+      },
+      {
+        "Resource": "Machine 5 - Turning & Milling",
+        "total_hours": 1412.25,
+        "n_distinct_products": 6,
+        "n_distinct_orders": 35
+      },
+      {
+        "Resource": "Machine 6 - Turning & Milling",
+        "total_hours": 1328.4166666666667,
+        "n_distinct_products": 6,
+        "n_distinct_orders": 39
+      },
+      {
+        "Resource": "Machine 2 - Round Grinding",
+        "total_hours": 1073.4166666666667,
+        "n_distinct_products": 15,
+        "n_distinct_orders": 47
+      },
+      {
+        "Resource": "Machine 3 - Round Grinding",
+        "total_hours": 1049.0666666666666,
+        "n_distinct_products": 14,
+        "n_distinct_orders": 44
+      },
+      {
+        "Resource": "Machine 10 - Grinding",
+        "total_hours": 1005.1333333333333,
+        "n_distinct_products": 13,
+        "n_distinct_orders": 21
+      },
+      {
+        "Resource": "Machine 9 - Turning & Milling",
+        "total_hours": 926.1333333333333,
+        "n_distinct_products": 14,
+        "n_distinct_orders": 26
+      },
+      {
+        "Resource": "Machine 8 - Turning & Milling",
+        "total_hours": 798.6166666666667,
+        "n_distinct_products": 18,
+        "n_distinct_orders": 44
+      },
+      {
+        "Resource": "Machine 1 - Lapping",
+        "total_hours": 656.75,
+        "n_distinct_products": 26,
+        "n_distinct_orders": 132
+      }
+    ]
+  },
+  "part5_evidence_reliability": {
+    "quality_event_coverage": {
+      "n_cases_total": 225,
+      "n_cases_with_at_least_one_qc_event": 214,
+      "coverage_pct": 95.1,
+      "note": "Reuses the Gate 2/3 category-coverage check: presence of Q.C.-labelled activities per case, not an assumption that all quality outcomes are logged."
+    },
+    "material_and_supplier_objects": {
+      "present_in_dataset": false,
+      "note": "Production_Data.csv has no material-lot, BOM, or supplier fields. Any finding that would require them is marked NOT_DEMONSTRATED, not answered with fabricated data, per the Gate 4 boundary against inventing customer data."
+    },
+    "machine_contention_evidence": {
+      "note": "Contention is inferred purely from Start/Complete timestamp overlap on the same Resource across different Case IDs. The dataset has no explicit queue, scheduling, or resource-lock log, so overlap is a proxy for contention, not a direct observation of a queueing event. Two overlapping intervals on one named resource could also reflect a data-entry granularity artefact (e.g. timestamps rounded to the same minute) rather than genuine simultaneous physical use -- not independently verifiable from this dataset alone."
+    },
+    "worker_reject_rate_evidence": {
+      "note": "Qty Rejected is attributed to the (Worker ID, Resource) pair active on that event row. The dataset does not distinguish worker-caused rejects from machine-caused or material-caused rejects, so this is a correlation, not an attributed root cause."
+    }
+  }
+}
