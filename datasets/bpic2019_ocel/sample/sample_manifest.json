@@ -1,0 +1,11 @@
+{
+  "source_file": "datasets/bpic2019_ocel/BPIC19.jsonocel",
+  "source_dataset_doi": "10.4121/46a7e15b-10c7-4ab2-988d-ee67d8ea515a",
+  "target_company": "companyID_0000",
+  "seed": 42,
+  "target_event_budget": 20000,
+  "n_pos_available_for_company": 75962,
+  "n_pos_sampled": 1011,
+  "n_events_sampled": 20011,
+  "n_objects_sampled": 4780
+}

@@ -302,7 +302,7 @@ gap before deciding to implement anything.
 * **Gate 1** — Reference architecture study: SAP Signavio, Celonis, SAP Digital Manufacturing, enterprise manufacturing process-mining implementations, digital twin references, object-centric process mining.
 * **Gate 2** — Reproduce a known ERP process-mining use case using a public dataset.
 * **Gate 3** — Test data-quality/reliability handling. *(done — see [reports/GATE3_EVIDENCE_GROUNDED_FINDINGS.md](reports/GATE3_EVIDENCE_GROUNDED_FINDINGS.md))*
-* **Gate 4** — Apply the approach to manufacturing event/object data. *(done — see [reports/GATE4_MULTI_OBJECT_RECONNAISSANCE.md](reports/GATE4_MULTI_OBJECT_RECONNAISSANCE.md))*
+* **Gate 4** — Apply the approach to manufacturing event/object data. *(done — first attempt superseded, see [reports/GATE4_MULTI_OBJECT_RECONNAISSANCE.md](reports/GATE4_MULTI_OBJECT_RECONNAISSANCE.md) for the historical record; restarted on a genuine multi-object dataset, see [reports/GATE1_TO_GATE4_RESEARCH_SUMMARY.md](reports/GATE1_TO_GATE4_RESEARCH_SUMMARY.md) and [reports/GATE4_DATASET_SELECTION.md](reports/GATE4_DATASET_SELECTION.md))*
 * **Gate 5** — Evaluate factory digital-twin/simulation capabilities.
 * **Gate 6** — Build evidence-grounded LENSIPS reasoning over structured results.
 * **Gate 7** — Apply the architecture to a small transformer-manufacturing model.

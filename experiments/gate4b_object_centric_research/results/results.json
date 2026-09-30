@@ -1,0 +1,456 @@
+{
+  "dataset_summary": {
+    "n_events": 20011,
+    "n_objects": 4780,
+    "n_activities": 35,
+    "object_type_counts": {
+      "POItem": 3044,
+      "PO": 1011,
+      "Vendor": 409,
+      "Resource": 316
+    },
+    "activity_counts": {
+      "Record Goods Receipt": 4307,
+      "Create Purchase Order Item": 3044,
+      "Record Invoice Receipt": 2763,
+      "Vendor creates invoice": 2651,
+      "Clear Invoice": 2361,
+      "Record Service Entry Sheet": 2339,
+      "Remove Payment Block": 712,
+      "Create Purchase Requisition Item": 546,
+      "Receive Order Confirmation": 390,
+      "Change Quantity": 259,
+      "Change Price": 162,
+      "Cancel Invoice Receipt": 87,
+      "Delete Purchase Order Item": 80,
+      "Cancel Goods Receipt": 64,
+      "Vendor creates debit memo": 55,
+      "Change Delivery Indicator": 45,
+      "SRM: In Transfer to Execution Syst.": 16,
+      "SRM: Created": 15,
+      "SRM: Complete": 15,
+      "SRM: Ordered": 15,
+      "SRM: Document Completed": 15,
+      "SRM: Awaiting Approval": 15,
+      "Change Storage Location": 14,
+      "SRM: Change was Transmitted": 13,
+      "Release Purchase Requisition": 6,
+      "Update Order Confirmation": 4,
+      "Reactivate Purchase Order Item": 4,
+      "Block Purchase Order Item": 3,
+      "Set Payment Block": 2,
+      "Cancel Subsequent Invoice": 2,
+      "SRM: Deleted": 2,
+      "Change Approval for Purchase Order": 2,
+      "Change Currency": 1,
+      "Change Final Invoice Indicator": 1,
+      "SRM: Transfer Failed (E.Sys.)": 1
+    },
+    "timestamp_min": "2016-04-04 22:59:00+00:00",
+    "timestamp_max": "2019-01-17 15:01:00+00:00"
+  },
+  "part_b_case_centric_baseline": {
+    "n_cases_poitem": 3044,
+    "petri_net_places": 72,
+    "petri_net_transitions": 105,
+    "token_based_replay_fitness": {
+      "perc_fit_traces": 77.43101182654402,
+      "average_trace_fitness": 0.9966601653514242,
+      "log_fitness": 0.9968202175008204,
+      "percentage_of_fitting_traces": 77.43101182654402
+    },
+    "top10_slowest_directly_follows_edges": [
+      {
+        "from": "Cancel Goods Receipt",
+        "to": "Cancel Invoice Receipt",
+        "mean_seconds": 15771729.23076923,
+        "median_seconds": 15772440.0
+      },
+      {
+        "from": "Clear Invoice",
+        "to": "Change Price",
+        "mean_seconds": 11331720.0,
+        "median_seconds": 11331720.0
+      },
+      {
+        "from": "Clear Invoice",
+        "to": "Cancel Invoice Receipt",
+        "mean_seconds": 6005409.72972973,
+        "median_seconds": 4929960.0
+      },
+      {
+        "from": "Vendor creates invoice",
+        "to": "Create Purchase Order Item",
+        "mean_seconds": 5944665.0,
+        "median_seconds": 504420.0
+      },
+      {
+        "from": "Change Quantity",
+        "to": "Delete Purchase Order Item",
+        "mean_seconds": 5719560.0,
+        "median_seconds": 5719560.0
+      },
+      {
+        "from": "Vendor creates debit memo",
+        "to": "Clear Invoice",
+        "mean_seconds": 5577900.0,
+        "median_seconds": 5577900.0
+      },
+      {
+        "from": "Record Invoice Receipt",
+        "to": "Set Payment Block",
+        "mean_seconds": 5403000.0,
+        "median_seconds": 5403000.0
+      },
+      {
+        "from": "Change Quantity",
+        "to": "Clear Invoice",
+        "mean_seconds": 4967250.0,
+        "median_seconds": 4967250.0
+      },
+      {
+        "from": "Change Price",
+        "to": "Clear Invoice",
+        "mean_seconds": 4603360.0,
+        "median_seconds": 5001900.0
+      },
+      {
+        "from": "Change Approval for Purchase Order",
+        "to": "Record Invoice Receipt",
+        "mean_seconds": 4323120.0,
+        "median_seconds": 4323120.0
+      }
+    ],
+    "case_duration_days": {
+      "mean": 73.0,
+      "median": 66.0,
+      "max": 772.6
+    },
+    "top10_activities": {
+      "Record Goods Receipt": 4307,
+      "Create Purchase Order Item": 3044,
+      "Record Invoice Receipt": 2763,
+      "Vendor creates invoice": 2651,
+      "Clear Invoice": 2361,
+      "Record Service Entry Sheet": 2339,
+      "Remove Payment Block": 712,
+      "Create Purchase Requisition Item": 546,
+      "Receive Order Confirmation": 390,
+      "Change Quantity": 259
+    },
+    "limitations": [
+      "The flattened log treats every POItem as an independent case: it has no way to represent that many different POItems share the same Vendor or the same processing Resource, so it cannot show whether delays or workload cluster on a shared object across cases.",
+      "Token-based-replay fitness and the performance DFG summarise the SINGLE chosen object type (POItem); flattening on a different object type (e.g. Vendor) would silently produce a structurally different process model from the same underlying data, and the case-centric view gives no signal that this choice matters.",
+      "A Vendor or Resource involved in many POItems' events appears only implicitly, as a repeated attribute value on many independent cases -- there is no object-level view of it."
+    ]
+  },
+  "part_c_object_centric_analysis": {
+    "ocdfg_object_types_covered": [
+      "PO",
+      "POItem",
+      "Resource",
+      "Vendor"
+    ],
+    "ocdfg_distinct_directly_follows_pairs_per_object_type": {
+      "Vendor": 286,
+      "Resource": 166,
+      "PO": 247,
+      "POItem": 221
+    },
+    "n_object_interaction_edges": 26543,
+    "cross_object_type_edge_counts": {
+      "POItem-Resource": 12484,
+      "PO-POItem": 3044,
+      "POItem-Vendor": 3044,
+      "Resource-Vendor": 2721,
+      "PO-Resource": 4239,
+      "PO-Vendor": 1011
+    },
+    "top10_vendors_by_connection_degree": [
+      {
+        "object_id": "1924713",
+        "degree": 258
+      },
+      {
+        "object_id": "1924667",
+        "degree": 245
+      },
+      {
+        "object_id": "1924664",
+        "degree": 160
+      },
+      {
+        "object_id": "1924730",
+        "degree": 117
+      },
+      {
+        "object_id": "1924936",
+        "degree": 108
+      },
+      {
+        "object_id": "1924675",
+        "degree": 94
+      },
+      {
+        "object_id": "1925254",
+        "degree": 88
+      },
+      {
+        "object_id": "1924867",
+        "degree": 81
+      },
+      {
+        "object_id": "1925170",
+        "degree": 75
+      },
+      {
+        "object_id": "1924845",
+        "degree": 70
+      }
+    ],
+    "top10_resources_by_connection_degree": [
+      {
+        "object_id": "1924142",
+        "degree": 2884
+      },
+      {
+        "object_id": "1924119",
+        "degree": 1224
+      },
+      {
+        "object_id": "1924061",
+        "degree": 783
+      },
+      {
+        "object_id": "1924040",
+        "degree": 694
+      },
+      {
+        "object_id": "1924065",
+        "degree": 662
+      },
+      {
+        "object_id": "1924069",
+        "degree": 605
+      },
+      {
+        "object_id": "1924148",
+        "degree": 564
+      },
+      {
+        "object_id": "1924071",
+        "degree": 406
+      },
+      {
+        "object_id": "1924038",
+        "degree": 396
+      },
+      {
+        "object_id": "1924063",
+        "degree": 384
+      }
+    ],
+    "connected_components": {
+      "n_components": 3,
+      "n_singleton_components": 0,
+      "largest_component_size": 4752,
+      "largest_component_n_distinct_pos": 1002,
+      "top10_component_sizes": [
+        4752,
+        22,
+        6
+      ]
+    }
+  },
+  "part_d_evidence_degradation": {
+    "coverage_by_item_category_original": {
+      "3-way match, invoice after GR": {
+        "n_items": 194,
+        "requires_gr_event_per_readme": true,
+        "n_items_with_gr_event": 181,
+        "gr_coverage_pct": 93.3,
+        "n_items_with_invoice_event": 145
+      },
+      "3-way match, invoice before GR": {
+        "n_items": 2651,
+        "requires_gr_event_per_readme": true,
+        "n_items_with_gr_event": 2539,
+        "gr_coverage_pct": 95.8,
+        "n_items_with_invoice_event": 2459
+      },
+      "Consignment": {
+        "n_items": 199,
+        "requires_gr_event_per_readme": false,
+        "n_items_with_gr_event": 187,
+        "gr_coverage_pct": 94.0,
+        "n_items_with_invoice_event": 0
+      }
+    },
+    "degradation_scenario": {
+      "description": "Goods Receipt events (Record/Cancel Goods Receipt) removed for a random 30% of 3-way-match items (both invoice-before-GR and invoice-after-GR categories).",
+      "n_three_way_items": 2845,
+      "n_items_degraded": 853,
+      "gr_coverage_pct_before": 95.6,
+      "gr_coverage_pct_after": 67.1,
+      "token_based_replay_fitness_before": {
+        "perc_fit_traces": 77.43101182654402,
+        "average_trace_fitness": 0.9966601653514242,
+        "log_fitness": 0.9968202175008204,
+        "percentage_of_fitting_traces": 77.43101182654402
+      },
+      "token_based_replay_fitness_after": {
+        "perc_fit_traces": 77.6281208935611,
+        "average_trace_fitness": 0.9961688779749676,
+        "log_fitness": 0.9963097637276249,
+        "percentage_of_fitting_traces": 77.6281208935611
+      }
+    }
+  },
+  "part_e_evidence_grounded_findings": [
+    {
+      "question": "Which vendor is associated with abnormally long purchase-item cycle time?",
+      "evidence_requirement": ">=5 items per vendor to compute a meaningful mean cycle time",
+      "coverage": {
+        "expected": 392,
+        "observed": 126,
+        "coverage_pct": 32.1,
+        "flag": "PARTIAL"
+      },
+      "confidence": "LOW",
+      "top5_slowest_vendors": [
+        {
+          "vendor": "vendor_1039",
+          "n_items": 13,
+          "mean_duration_days": 211.25972222222222
+        },
+        {
+          "vendor": "vendor_0453",
+          "n_items": 15,
+          "mean_duration_days": 192.025
+        },
+        {
+          "vendor": "vendor_0539",
+          "n_items": 47,
+          "mean_duration_days": 171.20208333333332
+        },
+        {
+          "vendor": "vendor_0274",
+          "n_items": 11,
+          "mean_duration_days": 153.03061868686868
+        },
+        {
+          "vendor": "vendor_0194",
+          "n_items": 35,
+          "mean_duration_days": 135.33791666666667
+        }
+      ],
+      "limitation": "Vendor cycle time here is confounded with item category and spend area, which we did not control for; this is a candidate signal, not an attributed root cause."
+    },
+    {
+      "question": "Is 3-way-match compliance (Goods Receipt required before/alongside invoice) satisfied for each item category?",
+      "evidence_requirement": "Every 3-way-match item must have >=1 Goods Receipt event per the dataset's own documented process rules",
+      "per_category_result": [
+        {
+          "item_category": "3-way match, invoice after GR",
+          "coverage": {
+            "expected": 194,
+            "observed": 181,
+            "coverage_pct": 93.3,
+            "flag": "OK"
+          },
+          "status": "HIGH_CONFIDENCE"
+        },
+        {
+          "item_category": "3-way match, invoice before GR",
+          "coverage": {
+            "expected": 2651,
+            "observed": 2539,
+            "coverage_pct": 95.8,
+            "flag": "OK"
+          },
+          "status": "HIGH_CONFIDENCE"
+        }
+      ],
+      "note": "This question is answered from the dataset's OWN documented compliance rule (README.txt), not an invented threshold."
+    },
+    {
+      "question": "Does a delay in one PO propagate to another PO through a shared vendor or shared processing resource?",
+      "evidence_requirement": "A resource-occupancy or workload-queue signal showing the shared object was busy/blocked, not just that it is connected to many objects",
+      "coverage": {
+        "expected": "resource-occupancy signal",
+        "observed": "none in this OCEL",
+        "flag": "MISSING"
+      },
+      "confidence": "WITHHELD",
+      "note": "The object interaction graph (Part C) shows WHICH POs share a vendor/resource, but this OCEL has no signal of workload or queueing pressure on that shared object, so propagation cannot be demonstrated here. Recorded as WITHHELD rather than inferred from co-occurrence alone."
+    }
+  ],
+  "part_f_pm4py_ocel_contributions": [
+    {
+      "part": "B (case-centric baseline)",
+      "finding": "Process model (Petri net), token-based-replay fitness, and performance DFG for the POItem-flattened log",
+      "pm4py_api_calls": [
+        "pm4py.ocel_flattening",
+        "pm4py.discover_petri_net_inductive",
+        "pm4py.fitness_token_based_replay",
+        "pm4py.discover_performance_dfg"
+      ],
+      "would_ordinary_pandas_groupby_join_suffice": false,
+      "classification": "genuine process-mining/OCEL finding",
+      "note": "Inductive-miner process discovery and token-based-replay fitness are genuine process-mining algorithms with no direct pandas equivalent; this part is standard single-case-notion process mining, applied here as the baseline the object-centric part is compared against."
+    },
+    {
+      "part": "C (object-centric: OC-DFG)",
+      "finding": "Object-centric directly-follows graph across all 4 object types simultaneously",
+      "pm4py_api_calls": [
+        "pm4py.discover_ocdfg"
+      ],
+      "would_ordinary_pandas_groupby_join_suffice": false,
+      "classification": "genuine process-mining/OCEL finding",
+      "note": "The OC-DFG discovery algorithm computes per-object-type directly-follows relations and their interplay natively from the OCEL event-object mapping; reproducing it with pandas would require re-implementing the OCEL directly-follows semantics (per-object-type sequencing) from scratch, not just a group-by."
+    },
+    {
+      "part": "C (object-centric: object interaction graph)",
+      "finding": "Vendor/Resource objects ranked by how many other objects (POs, POItems, other resources) they co-occur with in events",
+      "pm4py_api_calls": [
+        "pm4py.discover_objects_graph(graph_type='object_interaction')"
+      ],
+      "would_ordinary_pandas_groupby_join_suffice": true,
+      "classification": "ordinary relational analytics",
+      "note": "This specific ranking COULD be reproduced with a pandas group-by on the event-object mapping (count distinct co-occurring object ids per Vendor/Resource). It is reported here as ORDINARY RELATIONAL ANALYTICS made convenient by pm4py's object graph API, not as evidence unique to OCEL. The genuinely OCEL-native step is the interaction-graph CONSTRUCTION itself and the connected-component analysis below (Part C, connected components), which does not reduce to a simple group-by."
+    },
+    {
+      "part": "C (object-centric: connected components)",
+      "finding": "Whether the object interaction graph decomposes into many small independent components or a few giant ones",
+      "pm4py_api_calls": [
+        "pm4py.discover_objects_graph",
+        "networkx.connected_components (over the pm4py-produced edge set)"
+      ],
+      "would_ordinary_pandas_groupby_join_suffice": false,
+      "classification": "genuine process-mining/OCEL finding",
+      "note": "Connected-component analysis over an object-relationship graph is not a group-by or join; it is a graph-structural question (transitive reachability through shared objects) that pandas alone cannot answer without effectively re-implementing graph traversal. This is the clearest genuinely OCEL-native finding in this experiment."
+    },
+    {
+      "part": "D (evidence degradation)",
+      "finding": "Whether case-centric process fitness stays high even when a required evidence category (Goods Receipt events) is synthetically removed for a documented subset of items",
+      "pm4py_api_calls": [
+        "pm4py.ocel_flattening",
+        "pm4py.discover_petri_net_inductive",
+        "pm4py.fitness_token_based_replay"
+      ],
+      "would_ordinary_pandas_groupby_join_suffice": false,
+      "classification": "genuine process-mining/OCEL finding",
+      "note": "Re-tests the Gate 2 conclusion (process-mining fitness is not a completeness/reliability metric) against this dataset's own documented compliance-evidence requirement (item category -> required event types), rather than reusing the machine-shop dataset's QC-activity coverage check."
+    },
+    {
+      "part": "E (evidence-grounded findings)",
+      "finding": "Confidence gating for 3 factory-adjacent questions, one deliberately withheld for insufficient evidence",
+      "pm4py_api_calls": [
+        "(built on Part B/C/D outputs; no new pm4py call)"
+      ],
+      "would_ordinary_pandas_groupby_join_suffice": true,
+      "classification": "ordinary relational analytics",
+      "note": "The confidence-gating logic itself is ordinary control flow over already-computed coverage numbers, same as Gate 3's mechanism; it is not the source of the OCEL-specific finding, but it structures how the finding is reported."
+    }
+  ]
+}

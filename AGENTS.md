@@ -34,20 +34,37 @@ hypothesis. Read it before doing anything else here.
   bottleneck finding on the same dataset still runs and reports high
   confidence. Reproducible script:
   [experiments/gate3_evidence_grounded_findings/run_experiment.py](experiments/gate3_evidence_grounded_findings/run_experiment.py).
-- **Gate 4** (multi-object manufacturing intelligence reconnaissance) is
-  done — see
-  [reports/GATE4_MULTI_OBJECT_RECONNAISSANCE.md](reports/GATE4_MULTI_OBJECT_RECONNAISSANCE.md).
-  Compared a case-centric baseline against a multi-object (order/product/
-  operation/machine/worker/quality-event) view on the Gate 2/3 dataset. Key
-  finding: cross-case aggregation (shared-bottleneck-vs-product-cost
-  machines, product/machine quality concentration) is a real, low-complexity
-  gain over case-centric analysis; a naive timestamp-overlap proxy for
-  delay-propagation-via-shared-resource did not produce a usable signal
-  (flagged 99.7% of gaps, a discrimination failure) and is reported as NOT
-  DEMONSTRATED; material/supplier questions are also NOT DEMONSTRATED since
-  the dataset has no such fields. No OCEL framework, digital twin, or
-  transformer ontology was built. Reproducible script:
-  [experiments/gate4_multi_object_reconnaissance/run_experiment.py](experiments/gate4_multi_object_reconnaissance/run_experiment.py).
+- **Gate 4, first attempt** (multi-object manufacturing intelligence
+  reconnaissance on the Gate 2/3 machine-shop dataset) is superseded — see
+  [reports/GATE4_MULTI_OBJECT_RECONNAISSANCE.md](reports/GATE4_MULTI_OBJECT_RECONNAISSANCE.md)
+  for the historical record (not edited). That dataset was judged too
+  case-centric (no real material/supplier/quality object) to properly
+  test the object-centric hypothesis, so Gate 4 was restarted on a
+  different, genuinely multi-object dataset rather than patched.
+- **Gate 4, restart ("Gate 4b")** is done — see
+  [reports/GATE1_TO_GATE4_RESEARCH_SUMMARY.md](reports/GATE1_TO_GATE4_RESEARCH_SUMMARY.md)
+  (primary document) and
+  [reports/GATE4_DATASET_SELECTION.md](reports/GATE4_DATASET_SELECTION.md)
+  (dataset provenance/sampling). Dataset: a real-data subsample of the BPI
+  Challenge 2019 OCEL log (a real coatings/paints manufacturer's
+  purchase-to-pay process; PO/POItem/Vendor/Resource object types), loaded
+  and analysed as a genuine OCEL with PM4Py (`discover_ocdfg`,
+  `discover_objects_graph`, inductive-miner discovery, token-based-replay
+  fitness). Re-ran Gate 1's capability classification, Gate 2's
+  evidence-degradation test, and Gate 3's evidence-grounded-finding
+  mechanism against this new dataset (all reconfirmed), then ran a proper
+  object-centric vs case-centric comparison. Key finding: 1,002 of 1,011
+  sampled purchase orders (99.1%) sit in one connected component of the
+  object-interaction graph, reachable only through shared vendors/
+  resources — a genuinely OCEL-required finding (graph connectivity, not
+  a group-by) that the case-centric flattened view cannot represent.
+  Roughly half of the other object-centric analyses attempted were
+  honestly reclassified as "ordinary relational analytics" once OCEL was
+  hypothetically removed (see the report's "What PM4Py and OCEL Actually
+  Contributed" section). No OCEL framework, digital twin, LLM agent, or
+  transformer ontology was built. Reproducible scripts:
+  [experiments/gate4b_object_centric_research/run_experiment.py](experiments/gate4b_object_centric_research/run_experiment.py),
+  [experiments/gate4b_object_centric_research/scripts/build_sample.py](experiments/gate4b_object_centric_research/scripts/build_sample.py).
 
 Do not start Gate 5 or later without explicit instruction — see README.md
 section 12 for the gate sequence.
